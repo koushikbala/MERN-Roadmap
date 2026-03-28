@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Full Stack Dev — 90-Day Learning Path</title>
+<title>Full Stack Dev — 105-Day Learning Path</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -394,8 +394,8 @@ h1 {
 <div class="noise"></div>
 <div class="app">
   <header>
-    <h1>Full Stack Developer<br>90-Day Path</h1>
-    <p class="subtitle">JS → React → Node/Express → MongoDB → PostgreSQL → Job Ready</p>
+    <h1>Full Stack Developer<br>105-Day Path</h1>
+    <p class="subtitle">JS → Basic DSA → React → Node/Express → MongoDB → PostgreSQL → Job Ready</p>
   </header>
 
   <div class="stats-bar">
@@ -650,13 +650,186 @@ const DATA = [
     ]
   },
   {
-    phase: "Phase 2: React.js Mastery",
-    icon: "⚛",
-    color: "#61dafb",
-    range: "Day 21–42",
+    phase: "Phase 2: Basic DSA",
+    icon: "📊",
+    color: "#e879f9",
+    range: "Day 21–35",
     days: [
       {
         day: 21,
+        title: "DSA Fundamentals — Time & Space Complexity",
+        tags: ["dsa"],
+        topics: ["Big O notation: O(1), O(n), O(log n), O(n²)", "Best, worst, average case analysis", "Space complexity basics", "Common complexity classes"],
+        practice: [
+          { name: "GFG: Time Complexity", url: "https://www.geeksforgeeks.org/time-complexity-and-space-complexity/" },
+          { name: "Big O Cheat Sheet", url: "https://www.bigocheatsheet.com/" },
+          { name: "LeetCode: Complexity Analysis", url: "https://leetcode.com/discuss/general-discussion/497724/time-and-space-complexity-of-algorithms" }
+        ]
+      },
+      {
+        day: 22,
+        title: "Arrays & Strings — Essential Problems",
+        tags: ["dsa"],
+        topics: ["Two pointers technique", "Sliding window problems", "Array rotation, reversal", "String manipulation: palindrome, anagram"],
+        practice: [
+          { name: "LeetCode: Two Sum", url: "https://leetcode.com/problems/two-sum/" },
+          { name: "LeetCode: Valid Palindrome", url: "https://leetcode.com/problems/valid-palindrome/" },
+          { name: "GFG: Array Problems", url: "https://www.geeksforgeeks.org/array-data-structure/" }
+        ]
+      },
+      {
+        day: 23,
+        title: "Searching & Sorting Algorithms",
+        tags: ["dsa"],
+        topics: ["Linear search, Binary search", "Bubble, Selection, Insertion sort", "Merge sort, Quick sort", "When to use which algorithm"],
+        practice: [
+          { name: "LeetCode: Binary Search", url: "https://leetcode.com/problems/binary-search/" },
+          { name: "GFG: Sorting Algorithms", url: "https://www.geeksforgeeks.org/sorting-algorithms/" },
+          { name: "LeetCode: Sort Array", url: "https://leetcode.com/problems/sort-an-array/" }
+        ]
+      },
+      {
+        day: 24,
+        title: "Hash Tables & Maps",
+        tags: ["dsa"],
+        topics: ["Hash table implementation", "Collision handling", "Frequency counting patterns", "Two sum with hash table"],
+        practice: [
+          { name: "LeetCode: Contains Duplicate", url: "https://leetcode.com/problems/contains-duplicate/" },
+          { name: "LeetCode: Group Anagrams", url: "https://leetcode.com/problems/group-anagrams/" },
+          { name: "GFG: Hashing", url: "https://www.geeksforgeeks.org/hashing-data-structure/" }
+        ]
+      },
+      {
+        day: 25,
+        title: "Linked Lists — Singly & Doubly",
+        tags: ["dsa"],
+        topics: ["Linked list operations: insert, delete, traverse", "Reverse linked list", "Detect cycle, find middle", "Merge two sorted lists"],
+        practice: [
+          { name: "LeetCode: Reverse LL", url: "https://leetcode.com/problems/reverse-linked-list/" },
+          { name: "LeetCode: Merge Two Lists", url: "https://leetcode.com/problems/merge-two-sorted-lists/" },
+          { name: "GFG: Linked List", url: "https://www.geeksforgeeks.org/data-structures/linked-list/" }
+        ]
+      },
+      {
+        day: 26,
+        title: "Stacks & Queues",
+        tags: ["dsa"],
+        topics: ["Stack: push, pop, peek, isEmpty", "Queue: enqueue, dequeue", "Implement stack with queues", "Valid parentheses, balanced brackets"],
+        practice: [
+          { name: "LeetCode: Valid Parentheses", url: "https://leetcode.com/problems/valid-parentheses/" },
+          { name: "LeetCode: Implement Queue", url: "https://leetcode.com/problems/implement-queue-using-stacks/" },
+          { name: "GFG: Stack & Queue", url: "https://www.geeksforgeeks.org/stack-data-structure/" }
+        ]
+      },
+      {
+        day: 27,
+        title: "Trees — Binary Trees & Traversals",
+        tags: ["dsa"],
+        topics: ["Tree terminology: root, leaf, height", "Binary tree traversals: inorder, preorder, postorder", "Level order (BFS)", "Maximum depth, balanced tree"],
+        practice: [
+          { name: "LeetCode: Max Depth", url: "https://leetcode.com/problems/maximum-depth-of-binary-tree/" },
+          { name: "LeetCode: Invert Tree", url: "https://leetcode.com/problems/invert-binary-tree/" },
+          { name: "GFG: Binary Trees", url: "https://www.geeksforgeeks.org/binary-tree-data-structure/" }
+        ]
+      },
+      {
+        day: 28,
+        title: "Graphs — Representation & BFS/DFS",
+        tags: ["dsa"],
+        topics: ["Graph representation: adjacency list/matrix", "BFS and DFS traversal", "Connected components", "Shortest path in unweighted graph"],
+        practice: [
+          { name: "LeetCode: Number of Islands", url: "https://leetcode.com/problems/number-of-islands/" },
+          { name: "LeetCode: Clone Graph", url: "https://leetcode.com/problems/clone-graph/" },
+          { name: "GFG: Graph Traversals", url: "https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/" }
+        ]
+      },
+      {
+        day: 29,
+        title: "Recursion & Backtracking",
+        tags: ["dsa"],
+        topics: ["Recursion fundamentals", "Base case, recursive case", "Backtracking: N-Queens, Sudoku", "Fibonacci, factorial with recursion"],
+        practice: [
+          { name: "LeetCode: Climbing Stairs", url: "https://leetcode.com/problems/climbing-stairs/" },
+          { name: "LeetCode: N-Queens", url: "https://leetcode.com/problems/n-queens/" },
+          { name: "GFG: Recursion", url: "https://www.geeksforgeeks.org/recursion/" }
+        ]
+      },
+      {
+        day: 30,
+        title: "Dynamic Programming — Introduction",
+        tags: ["dsa"],
+        topics: ["Memoization vs Tabulation", "Fibonacci with DP", "0/1 Knapsack basics", "Longest Common Subsequence"],
+        practice: [
+          { name: "LeetCode: House Robber", url: "https://leetcode.com/problems/house-robber/" },
+          { name: "LeetCode: Coin Change", url: "https://leetcode.com/problems/coin-change/" },
+          { name: "GFG: Dynamic Programming", url: "https://www.geeksforgeeks.org/dynamic-programming/" }
+        ]
+      },
+      {
+        day: 31,
+        title: "Greedy Algorithms",
+        tags: ["dsa"],
+        topics: ["Greedy choice property", "Activity selection problem", "Huffman coding basics", "Fractional knapsack"],
+        practice: [
+          { name: "LeetCode: Jump Game", url: "https://leetcode.com/problems/jump-game/" },
+          { name: "GFG: Greedy Algorithms", url: "https://www.geeksforgeeks.org/greedy-algorithms/" },
+          { name: "LeetCode: Gas Station", url: "https://leetcode.com/problems/gas-station/" }
+        ]
+      },
+      {
+        day: 32,
+        title: "DSA Problem Solving — Easy to Medium",
+        tags: ["dsa"],
+        topics: ["Mixed problems practice", "Pattern recognition", "Optimizing brute force solutions", "Common interview patterns"],
+        practice: [
+          { name: "LeetCode: Top 100 Liked", url: "https://leetcode.com/problemset/top-100-liked-questions/" },
+          { name: "GFG: Practice Problems", url: "https://www.geeksforgeeks.org/explore?page=1&sortBy=submissions" },
+          { name: "Codeforces: Problem Set", url: "https://codeforces.com/problemset" }
+        ]
+      },
+      {
+        day: 33,
+        title: "Bit Manipulation",
+        tags: ["dsa"],
+        topics: ["Bitwise operators: AND, OR, XOR, NOT", "Left/right shift", "Count set bits", "Power of two, single number"],
+        practice: [
+          { name: "LeetCode: Single Number", url: "https://leetcode.com/problems/single-number/" },
+          { name: "LeetCode: Number of 1 Bits", url: "https://leetcode.com/problems/number-of-1-bits/" },
+          { name: "GFG: Bit Manipulation", url: "https://www.geeksforgeeks.org/bits-manipulation-important-tactics/" }
+        ]
+      },
+      {
+        day: 34,
+        title: "DSA Mock Interview Practice",
+        tags: ["dsa"],
+        topics: ["Time yourself on problems", "Explain solution approach", "Code without IDE", "Common mistakes & fixes"],
+        practice: [
+          { name: "LeetCode: Blind 75", url: "https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions" },
+          { name: "Pramp: Free Mock", url: "https://www.pramp.com/" },
+          { name: "GFG: Interview Prep", url: "https://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/" }
+        ]
+      },
+      {
+        day: 35,
+        title: "DSA Revision & Advanced Patterns",
+        tags: ["dsa"],
+        topics: ["Review all algorithms", "Sliding window maximum", "Trie data structure", "Union-Find basics"],
+        practice: [
+          { name: "LeetCode: Sliding Window", url: "https://leetcode.com/problems/sliding-window-maximum/" },
+          { name: "GFG: Advanced DSA", url: "https://www.geeksforgeeks.org/advanced-data-structures/" },
+          { name: "LeetCode: Daily Challenge", url: "https://leetcode.com/problemset/all/" }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "Phase 3: React.js Mastery",
+    icon: "⚛",
+    color: "#61dafb",
+    range: "Day 36–57",
+    days: [
+      {
+        day: 36,
         title: "React Setup — Vite, JSX, Component Basics",
         tags: ["react"],
         topics: ["Create project with Vite", "JSX rules & expressions", "Functional components", "Component tree & composition"],
@@ -667,7 +840,7 @@ const DATA = [
         ]
       },
       {
-        day: 22,
+        day: 37,
         title: "Props & Component Communication",
         tags: ["react"],
         topics: ["Passing props, children prop", "Prop drilling awareness", "Default props, prop types", "Component reusability patterns"],
@@ -678,7 +851,7 @@ const DATA = [
         ]
       },
       {
-        day: 23,
+        day: 38,
         title: "State Management with useState",
         tags: ["react"],
         topics: ["useState hook deep dive", "State updates & batching", "Functional updates", "State for arrays & objects"],
@@ -689,7 +862,7 @@ const DATA = [
         ]
       },
       {
-        day: 24,
+        day: 39,
         title: "Event Handling & Conditional Rendering",
         tags: ["react"],
         topics: ["onClick, onChange, onSubmit", "Synthetic events", "Conditional rendering: &&, ternary, early return", "Rendering lists with key prop"],
@@ -700,7 +873,7 @@ const DATA = [
         ]
       },
       {
-        day: 25,
+        day: 40,
         title: "useEffect — Side Effects & Lifecycle",
         tags: ["react"],
         topics: ["useEffect syntax & dependency array", "Cleanup functions", "Fetching data in useEffect", "Common pitfalls: infinite loops"],
@@ -711,7 +884,7 @@ const DATA = [
         ]
       },
       {
-        day: 26,
+        day: 41,
         title: "Forms — Controlled & Uncontrolled Components",
         tags: ["react"],
         topics: ["Controlled inputs with state", "useRef for uncontrolled forms", "Form validation patterns", "Multi-field forms with single state"],
@@ -722,7 +895,7 @@ const DATA = [
         ]
       },
       {
-        day: 27,
+        day: 42,
         title: "React Router — SPA Navigation",
         tags: ["react"],
         topics: ["BrowserRouter, Routes, Route", "Link & NavLink", "useNavigate, useParams, useSearchParams", "Nested routes, layout routes, 404 page"],
@@ -733,7 +906,7 @@ const DATA = [
         ]
       },
       {
-        day: 28,
+        day: 43,
         title: "Styling in React — CSS Modules, Tailwind",
         tags: ["react"],
         topics: ["CSS Modules setup", "Tailwind CSS with React", "Styled Components basics", "Responsive design in React"],
@@ -744,7 +917,7 @@ const DATA = [
         ]
       },
       {
-        day: 29,
+        day: 44,
         title: "useContext — Global State Without Props",
         tags: ["react"],
         topics: ["createContext, Provider pattern", "useContext hook", "Theme toggling with context", "Auth context example"],
@@ -755,7 +928,7 @@ const DATA = [
         ]
       },
       {
-        day: 30,
+        day: 45,
         title: "useReducer & Complex State Logic",
         tags: ["react"],
         topics: ["useReducer vs useState", "Dispatch, action, reducer pattern", "Combining useReducer + useContext", "Shopping cart state management"],
@@ -766,7 +939,7 @@ const DATA = [
         ]
       },
       {
-        day: 31,
+        day: 46,
         title: "Custom Hooks — Reusable Logic",
         tags: ["react"],
         topics: ["Extracting logic into custom hooks", "useFetch, useLocalStorage, useDebounce", "Rules of hooks", "Testing custom hooks"],
@@ -777,7 +950,7 @@ const DATA = [
         ]
       },
       {
-        day: 32,
+        day: 47,
         title: "Performance — memo, useMemo, useCallback",
         tags: ["react"],
         topics: ["React.memo for component memoization", "useMemo for expensive calculations", "useCallback for stable references", "React DevTools Profiler"],
@@ -788,7 +961,7 @@ const DATA = [
         ]
       },
       {
-        day: 33,
+        day: 48,
         title: "React Project 1 — Movie Search App",
         tags: ["react", "project"],
         topics: ["OMDB/TMDB API integration", "Search with debounce", "Loading states, error handling", "Responsive card grid"],
@@ -799,7 +972,7 @@ const DATA = [
         ]
       },
       {
-        day: 34,
+        day: 49,
         title: "State Management — Redux Toolkit Intro",
         tags: ["react"],
         topics: ["Redux concepts: store, slice, reducer", "configureStore, createSlice", "useSelector, useDispatch", "Redux DevTools"],
@@ -810,7 +983,7 @@ const DATA = [
         ]
       },
       {
-        day: 35,
+        day: 50,
         title: "Redux Toolkit — Async Thunks & RTK Query",
         tags: ["react"],
         topics: ["createAsyncThunk for API calls", "extraReducers, loading/error states", "RTK Query basics: createApi", "Cache invalidation"],
@@ -821,7 +994,7 @@ const DATA = [
         ]
       },
       {
-        day: 36,
+        day: 51,
         title: "DSA Day — Hash Maps & Sets in JS",
         tags: ["js", "dsa"],
         topics: ["Map & Set in JavaScript", "Frequency counter pattern", "Anagram, duplicate detection", "Two Sum optimal solution"],
@@ -832,7 +1005,7 @@ const DATA = [
         ]
       },
       {
-        day: 37,
+        day: 52,
         title: "Testing React — Jest & React Testing Library",
         tags: ["react"],
         topics: ["Jest basics: describe, it, expect", "RTL: render, screen, fireEvent", "Testing user interactions", "Mocking API calls"],
@@ -843,7 +1016,7 @@ const DATA = [
         ]
       },
       {
-        day: 38,
+        day: 53,
         title: "React Project 2 — E-Commerce Product Page",
         tags: ["react", "project"],
         topics: ["Product listing with filters", "Shopping cart with useReducer", "React Router for product details", "Local Storage persistence"],
@@ -854,7 +1027,7 @@ const DATA = [
         ]
       },
       {
-        day: 39,
+        day: 54,
         title: "TypeScript Basics for React",
         tags: ["react"],
         topics: ["TS types: string, number, boolean, array, object", "Interfaces vs Types", "Typing props, state, events in React", "Generics basics"],
@@ -865,7 +1038,7 @@ const DATA = [
         ]
       },
       {
-        day: 40,
+        day: 55,
         title: "Deployment — Vercel, Netlify, GitHub Pages",
         tags: ["react"],
         topics: ["Building for production", "Deploy to Vercel/Netlify", "Environment variables", "CI/CD basics with GitHub Actions"],
@@ -876,7 +1049,7 @@ const DATA = [
         ]
       },
       {
-        day: 41,
+        day: 56,
         title: "DSA — Recursion & Trees",
         tags: ["dsa"],
         topics: ["Recursion fundamentals", "Binary tree traversals (in/pre/post)", "BFS vs DFS", "Common tree interview problems"],
@@ -887,7 +1060,7 @@ const DATA = [
         ]
       },
       {
-        day: 42,
+        day: 57,
         title: "React Revision & Portfolio Setup",
         tags: ["react", "project"],
         topics: ["Revise hooks, routing, state management", "Set up portfolio website with React", "Showcase 2-3 projects built so far", "Responsive, animated portfolio"],
@@ -900,13 +1073,13 @@ const DATA = [
     ]
   },
   {
-    phase: "Phase 3: Node.js & Express.js Backend",
+    phase: "Phase 4: Node.js & Express.js Backend",
     icon: "N",
     color: "#68a063",
-    range: "Day 43–60",
+    range: "Day 58–75",
     days: [
       {
-        day: 43,
+        day: 58,
         title: "Node.js Intro — Runtime, Modules, npm",
         tags: ["node"],
         topics: ["Node.js architecture & event loop", "CommonJS vs ES modules", "npm init, package.json", "Built-in modules: fs, path, os"],
@@ -917,7 +1090,7 @@ const DATA = [
         ]
       },
       {
-        day: 44,
+        day: 59,
         title: "File System & Streams",
         tags: ["node"],
         topics: ["fs.readFile, fs.writeFile, fs.appendFile", "Sync vs Async file operations", "Streams: readable, writable, pipe", "CSV/JSON file processing"],
@@ -928,7 +1101,7 @@ const DATA = [
         ]
       },
       {
-        day: 45,
+        day: 60,
         title: "HTTP Module & Basic Server",
         tags: ["node"],
         topics: ["http.createServer", "Request & response objects", "Routing without framework", "Serving static files & JSON"],
@@ -939,7 +1112,7 @@ const DATA = [
         ]
       },
       {
-        day: 46,
+        day: 61,
         title: "Express.js — Setup, Routing, Middleware",
         tags: ["node"],
         topics: ["Express setup, app.get/post/put/delete", "Route parameters & query strings", "Middleware concept: app.use", "Built-in middleware: json, urlencoded, static"],
@@ -950,7 +1123,7 @@ const DATA = [
         ]
       },
       {
-        day: 47,
+        day: 62,
         title: "Express — Custom Middleware & Error Handling",
         tags: ["node"],
         topics: ["Writing custom middleware", "Logger, auth checker middleware", "Error handling middleware", "express-async-handler / express-async-errors"],
@@ -961,7 +1134,7 @@ const DATA = [
         ]
       },
       {
-        day: 48,
+        day: 63,
         title: "RESTful API Design Principles",
         tags: ["node"],
         topics: ["REST constraints & best practices", "Resource naming, HTTP verbs", "Status codes: 200, 201, 400, 401, 404, 500", "API versioning, pagination"],
@@ -972,7 +1145,7 @@ const DATA = [
         ]
       },
       {
-        day: 49,
+        day: 64,
         title: "Express — CRUD API with In-Memory Data",
         tags: ["node", "project"],
         topics: ["Full CRUD for a resource (users/todos)", "Input validation with Joi/express-validator", "Postman/Thunder Client testing", "Project structure: routes, controllers"],
@@ -983,7 +1156,7 @@ const DATA = [
         ]
       },
       {
-        day: 50,
+        day: 65,
         title: "Authentication — JWT & bcrypt",
         tags: ["node"],
         topics: ["Password hashing with bcryptjs", "JWT creation & verification", "Protect routes with auth middleware", "Token refresh strategy"],
@@ -994,7 +1167,7 @@ const DATA = [
         ]
       },
       {
-        day: 51,
+        day: 66,
         title: "File Upload — Multer & Cloudinary",
         tags: ["node"],
         topics: ["Multer setup for file uploads", "File size & type validation", "Cloudinary integration for image hosting", "Profile picture upload flow"],
@@ -1005,7 +1178,7 @@ const DATA = [
         ]
       },
       {
-        day: 52,
+        day: 67,
         title: "Email & Notifications — Nodemailer",
         tags: ["node"],
         topics: ["Nodemailer setup", "Send email verification", "Password reset flow", "Rate limiting with express-rate-limit"],
@@ -1016,7 +1189,7 @@ const DATA = [
         ]
       },
       {
-        day: 53,
+        day: 68,
         title: "Real-time — Socket.io Basics",
         tags: ["node"],
         topics: ["WebSocket vs HTTP", "Socket.io server & client setup", "Events: emit, on, broadcast", "Build: Live chat room"],
@@ -1027,7 +1200,7 @@ const DATA = [
         ]
       },
       {
-        day: 54,
+        day: 69,
         title: "API Security — Helmet, CORS, Sanitization",
         tags: ["node"],
         topics: ["Helmet.js security headers", "CORS configuration", "Data sanitization: xss-clean, mongo-sanitize", "HPP (HTTP Parameter Pollution)"],
@@ -1038,7 +1211,7 @@ const DATA = [
         ]
       },
       {
-        day: 55,
+        day: 70,
         title: "Caching, Logging & Environment Config",
         tags: ["node"],
         topics: ["dotenv for config management", "Winston/Morgan for logging", "Redis basics for caching", "Graceful error handling patterns"],
@@ -1049,7 +1222,7 @@ const DATA = [
         ]
       },
       {
-        day: 56,
+        day: 71,
         title: "DSA — Graphs & BFS/DFS",
         tags: ["dsa"],
         topics: ["Graph representation: adj list/matrix", "BFS & DFS traversal", "Shortest path basics", "Common graph interview problems"],
@@ -1060,7 +1233,7 @@ const DATA = [
         ]
       },
       {
-        day: 57,
+        day: 72,
         title: "API Documentation — Swagger/OpenAPI",
         tags: ["node"],
         topics: ["Swagger UI setup with swagger-jsdoc", "Writing API documentation", "Schema definitions", "Interactive API testing"],
@@ -1071,7 +1244,7 @@ const DATA = [
         ]
       },
       {
-        day: 58,
+        day: 73,
         title: "Testing Backend — Jest & Supertest",
         tags: ["node"],
         topics: ["Unit testing with Jest", "Integration tests with Supertest", "Mocking database calls", "Test coverage reports"],
@@ -1082,7 +1255,7 @@ const DATA = [
         ]
       },
       {
-        day: 59,
+        day: 74,
         title: "Express Project — Blog API (Part 1)",
         tags: ["node", "project"],
         topics: ["Project setup & folder structure", "User model, auth routes", "Post CRUD routes", "Middleware: auth, validation, error"],
@@ -1093,7 +1266,7 @@ const DATA = [
         ]
       },
       {
-        day: 60,
+        day: 75,
         title: "Express Project — Blog API (Part 2: Deploy)",
         tags: ["node", "project"],
         topics: ["Comment system", "Pagination & search", "Deploy to Railway/Render", "Connect to production DB"],
@@ -1106,13 +1279,13 @@ const DATA = [
     ]
   },
   {
-    phase: "Phase 4: MongoDB & Mongoose",
+    phase: "Phase 5: MongoDB & Mongoose",
     icon: "M",
     color: "#4db33d",
-    range: "Day 61–72",
+    range: "Day 76–87",
     days: [
       {
-        day: 61,
+        day: 76,
         title: "MongoDB Basics — Install, CRUD, Shell",
         tags: ["mongo"],
         topics: ["MongoDB vs SQL databases", "MongoDB Atlas setup", "mongosh: insertOne, find, updateOne, deleteOne", "Documents, collections, databases"],
@@ -1123,7 +1296,7 @@ const DATA = [
         ]
       },
       {
-        day: 62,
+        day: 77,
         title: "Mongoose — Schemas, Models, Validation",
         tags: ["mongo", "node"],
         topics: ["Mongoose connection & schemas", "Schema types, required, default, enum", "Custom validators", "Model.create, find, findById, update, delete"],
@@ -1134,7 +1307,7 @@ const DATA = [
         ]
       },
       {
-        day: 63,
+        day: 78,
         title: "Mongoose — Relations & Population",
         tags: ["mongo", "node"],
         topics: ["Embedding vs Referencing", "ObjectId references", "populate() for joins", "Virtual populate, pre/post hooks"],
@@ -1145,7 +1318,7 @@ const DATA = [
         ]
       },
       {
-        day: 64,
+        day: 79,
         title: "MongoDB Aggregation Pipeline",
         tags: ["mongo"],
         topics: ["$match, $group, $sort, $project", "$lookup for joins", "$unwind, $addFields", "Pagination with aggregation"],
@@ -1156,7 +1329,7 @@ const DATA = [
         ]
       },
       {
-        day: 65,
+        day: 80,
         title: "MongoDB Indexing & Performance",
         tags: ["mongo"],
         topics: ["Single & compound indexes", "Text indexes for search", "explain() for query analysis", "Index strategies for performance"],
@@ -1167,7 +1340,7 @@ const DATA = [
         ]
       },
       {
-        day: 66,
+        day: 81,
         title: "Full MERN CRUD — Express + MongoDB",
         tags: ["mongo", "node", "project"],
         topics: ["Connect Express to MongoDB Atlas", "CRUD API with Mongoose models", "Error handling, validation", "Test with Postman"],
@@ -1178,7 +1351,7 @@ const DATA = [
         ]
       },
       {
-        day: 67,
+        day: 82,
         title: "MERN Auth — Register/Login/Protected Routes",
         tags: ["mongo", "node", "react"],
         topics: ["User model with hashed password", "Login/Register endpoints", "JWT in React: localStorage/httpOnly cookie", "Protected routes on frontend"],
@@ -1189,7 +1362,7 @@ const DATA = [
         ]
       },
       {
-        day: 68,
+        day: 83,
         title: "MERN Project — Task Manager (Part 1)",
         tags: ["mongo", "node", "react", "project"],
         topics: ["Backend: Task model, CRUD API, auth", "Frontend: React setup, API service", "Task list, create, update, delete UI", "User dashboard"],
@@ -1200,7 +1373,7 @@ const DATA = [
         ]
       },
       {
-        day: 69,
+        day: 84,
         title: "MERN Project — Task Manager (Part 2)",
         tags: ["mongo", "node", "react", "project"],
         topics: ["Drag-and-drop with react-beautiful-dnd", "Filter by status, priority, date", "User profile & settings page", "Deploy full stack"],
@@ -1211,7 +1384,7 @@ const DATA = [
         ]
       },
       {
-        day: 70,
+        day: 85,
         title: "DSA — Dynamic Programming Basics",
         tags: ["dsa"],
         topics: ["Memoization vs Tabulation", "Fibonacci, Climbing Stairs", "Coin Change problem", "Longest Common Subsequence"],
@@ -1222,7 +1395,7 @@ const DATA = [
         ]
       },
       {
-        day: 71,
+        day: 86,
         title: "MongoDB Transactions & Advanced Patterns",
         tags: ["mongo"],
         topics: ["ACID transactions in MongoDB", "Multi-document transactions", "Schema design patterns: bucket, subset", "Change streams"],
@@ -1233,7 +1406,7 @@ const DATA = [
         ]
       },
       {
-        day: 72,
+        day: 87,
         title: "MongoDB Revision & Practice",
         tags: ["mongo", "dsa"],
         topics: ["Revise aggregation, indexing, transactions", "Practice MongoDB interview questions", "Optimize existing project queries", "DSA: 5 medium LeetCode problems"],
@@ -1246,13 +1419,13 @@ const DATA = [
     ]
   },
   {
-    phase: "Phase 5: PostgreSQL & Prisma/Sequelize",
+    phase: "Phase 6: PostgreSQL & Prisma/Sequelize",
     icon: "PG",
     color: "#336791",
-    range: "Day 73–82",
+    range: "Day 88–97",
     days: [
       {
-        day: 73,
+        day: 88,
         title: "PostgreSQL Basics — SQL Fundamentals",
         tags: ["pg"],
         topics: ["PostgreSQL install & pgAdmin", "CREATE TABLE, INSERT, SELECT", "WHERE, ORDER BY, LIMIT, OFFSET", "Data types: serial, varchar, int, timestamp, boolean"],
@@ -1263,7 +1436,7 @@ const DATA = [
         ]
       },
       {
-        day: 74,
+        day: 89,
         title: "SQL — Joins, Subqueries, Aggregates",
         tags: ["pg"],
         topics: ["INNER, LEFT, RIGHT, FULL joins", "Subqueries & CTEs", "GROUP BY, HAVING, COUNT, SUM, AVG", "DISTINCT, UNION, INTERSECT"],
@@ -1274,7 +1447,7 @@ const DATA = [
         ]
       },
       {
-        day: 75,
+        day: 90,
         title: "PostgreSQL — Constraints, Indexes, Views",
         tags: ["pg"],
         topics: ["PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK", "CREATE INDEX, composite indexes", "Views & materialized views", "Sequences & auto-increment"],
@@ -1285,7 +1458,7 @@ const DATA = [
         ]
       },
       {
-        day: 76,
+        day: 91,
         title: "Node.js + PostgreSQL — pg & Connection Pooling",
         tags: ["pg", "node"],
         topics: ["pg (node-postgres) library", "Connection pooling", "Parameterized queries (SQL injection prevention)", "CRUD operations from Node.js"],
@@ -1296,7 +1469,7 @@ const DATA = [
         ]
       },
       {
-        day: 77,
+        day: 92,
         title: "Prisma ORM — Setup, Schema, Migrations",
         tags: ["pg", "node"],
         topics: ["Prisma init & schema.prisma", "Models, relations, enums", "prisma migrate dev", "Prisma Client: create, findMany, update, delete"],
@@ -1307,7 +1480,7 @@ const DATA = [
         ]
       },
       {
-        day: 78,
+        day: 93,
         title: "Prisma — Relations, Filtering, Transactions",
         tags: ["pg", "node"],
         topics: ["One-to-many, many-to-many relations", "where, include, select, orderBy", "Prisma transactions", "Seeding data"],
@@ -1318,7 +1491,7 @@ const DATA = [
         ]
       },
       {
-        day: 79,
+        day: 94,
         title: "Express + Prisma + PostgreSQL API",
         tags: ["pg", "node", "project"],
         topics: ["Full REST API with Prisma + Express", "User auth with PostgreSQL", "Role-based access control", "Pagination, search, sorting"],
@@ -1329,7 +1502,7 @@ const DATA = [
         ]
       },
       {
-        day: 80,
+        day: 95,
         title: "MongoDB vs PostgreSQL — When to Use What",
         tags: ["mongo", "pg"],
         topics: ["Document vs Relational model", "When to choose MongoDB", "When to choose PostgreSQL", "Hybrid architecture patterns"],
@@ -1340,7 +1513,7 @@ const DATA = [
         ]
       },
       {
-        day: 81,
+        day: 96,
         title: "DSA — Greedy & Backtracking",
         tags: ["dsa"],
         topics: ["Greedy algorithm patterns", "Activity selection, Huffman coding", "Backtracking: N-Queens, Sudoku solver", "When to use greedy vs DP"],
@@ -1351,7 +1524,7 @@ const DATA = [
         ]
       },
       {
-        day: 82,
+        day: 97,
         title: "PostgreSQL Revision & SQL Practice",
         tags: ["pg", "dsa"],
         topics: ["Revise joins, aggregations, Prisma", "HackerRank SQL challenges", "Optimize queries with EXPLAIN ANALYZE", "DSA: 5 medium problems"],
@@ -1364,13 +1537,13 @@ const DATA = [
     ]
   },
   {
-    phase: "Phase 6: Capstone & Job Prep",
+    phase: "Phase 7: Capstone & Job Prep",
     icon: "🚀",
     color: "#ff6b6b",
-    range: "Day 83–90",
+    range: "Day 98–105",
     days: [
       {
-        day: 83,
+        day: 98,
         title: "Capstone Project — Full Stack App (Day 1)",
         tags: ["react", "node", "mongo", "pg", "project"],
         topics: ["Choose project: Job Board / Social Media / E-Commerce", "Plan features, DB schema, API design", "Set up monorepo or separate repos", "Backend: Models, auth, core CRUD"],
@@ -1381,7 +1554,7 @@ const DATA = [
         ]
       },
       {
-        day: 84,
+        day: 99,
         title: "Capstone Project (Day 2) — Backend Complete",
         tags: ["node", "mongo", "pg", "project"],
         topics: ["Complete all API endpoints", "File upload, email notifications", "Input validation & error handling", "API documentation with Swagger"],
@@ -1392,7 +1565,7 @@ const DATA = [
         ]
       },
       {
-        day: 85,
+        day: 100,
         title: "Capstone Project (Day 3) — Frontend Complete",
         tags: ["react", "project"],
         topics: ["All pages with React Router", "State management (Redux/Context)", "Responsive design, loading states", "Connect frontend to backend API"],
@@ -1403,7 +1576,7 @@ const DATA = [
         ]
       },
       {
-        day: 86,
+        day: 101,
         title: "Capstone Project (Day 4) — Polish & Deploy",
         tags: ["react", "node", "project"],
         topics: ["Testing critical flows", "Performance optimization", "Deploy: Vercel (frontend) + Render (backend)", "Environment variables, CORS setup"],
@@ -1414,7 +1587,7 @@ const DATA = [
         ]
       },
       {
-        day: 87,
+        day: 102,
         title: "Portfolio & Resume — Showcase Your Work",
         tags: ["project"],
         topics: ["Update portfolio with all projects", "Write project READMEs with screenshots", "Create/update resume for full stack roles", "LinkedIn optimization, GitHub profile"],
@@ -1425,7 +1598,7 @@ const DATA = [
         ]
       },
       {
-        day: 88,
+        day: 103,
         title: "System Design & Interview Prep",
         tags: ["dsa"],
         topics: ["System design basics: load balancing, caching, CDN", "Database sharding, replication", "Design: URL shortener, chat app", "Behavioral interview: STAR method"],
@@ -1436,7 +1609,7 @@ const DATA = [
         ]
       },
       {
-        day: 89,
+        day: 104,
         title: "Mock Interviews & DSA Marathon",
         tags: ["dsa"],
         topics: ["Solve 10 LeetCode problems (easy+medium mix)", "Mock interview on Pramp/Interviewing.io", "Review common JS/React/Node interview Qs", "Time yourself: 20 min per problem"],
@@ -1447,8 +1620,8 @@ const DATA = [
         ]
       },
       {
-        day: 90,
-        title: "🎓 Day 90 — You're Job Ready!",
+        day: 105,
+        title: "🎓 Day 105 — You're Job Ready!",
         tags: ["project"],
         topics: ["Final checklist: portfolio, resume, GitHub, LinkedIn", "Apply to 10 jobs today", "Review all weak areas identified", "Plan: Continue DSA daily, build side projects"],
         practice: [
@@ -1461,7 +1634,7 @@ const DATA = [
   }
 ];
 
-const STORAGE_KEY = "fsd90_progress";
+const STORAGE_KEY = "fsd105_progress";
 
 function loadProgress() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
