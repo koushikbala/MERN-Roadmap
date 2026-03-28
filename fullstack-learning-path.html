@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Stack Dev — 90-Day Learning Path</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a26;
+  --surface3: #222233;
+  --border: #2a2a3d;
+  --text: #e8e8f0;
+  --text-dim: #8888a8;
+  --text-muted: #55556a;
+  --accent-js: #f7df1e;
+  --accent-react: #61dafb;
+  --accent-node: #68a063;
+  --accent-mongo: #4db33d;
+  --accent-pg: #336791;
+  --accent-project: #ff6b6b;
+  --accent-dsa: #e879f9;
+  --check: #22c55e;
+  --glow-js: rgba(247,223,30,0.1);
+  --glow-react: rgba(97,218,251,0.1);
+  --glow-node: rgba(104,160,99,0.1);
+  --glow-mongo: rgba(77,179,61,0.1);
+  --glow-pg: rgba(51,103,145,0.1);
+  --glow-project: rgba(255,107,107,0.1);
+  --glow-dsa: rgba(232,121,249,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.noise {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 24px 16px 80px; }
+
+header {
+  text-align: center;
+  padding: 48px 0 36px;
+  position: relative;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(97,218,251,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #fff 0%, #61dafb 50%, #f7df1e 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* Stats Bar */
+.stats-bar {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 28px 0 12px;
+}
+
+.stat-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-family: 'JetBrains Mono', monospace;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.stat-chip .num { font-weight: 700; color: var(--check); }
+
+/* Progress */
+.progress-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 20px 0 32px;
+}
+
+.progress-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+}
+
+.progress-header span { font-size: 0.9rem; color: var(--text-dim); }
+.progress-header .pct { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--check); font-size: 1.1rem; }
+
+.progress-track {
+  width: 100%; height: 8px;
+  background: var(--surface3);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #22c55e, #61dafb);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Phase Tabs */
+.phase-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.phase-tabs::-webkit-scrollbar { display: none; }
+
+.phase-tab {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  font-family: 'Outfit', sans-serif;
+}
+
+.phase-tab:hover { border-color: #444; color: var(--text); }
+.phase-tab.active { background: var(--surface3); border-color: #555; color: #fff; font-weight: 600; }
+
+/* Phase Section */
+.phase-section { margin-bottom: 36px; animation: fadeUp 0.4s ease; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+.phase-title-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.phase-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.phase-title-bar h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.phase-title-bar .phase-range {
+  font-size: 0.78rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+/* Day Card */
+.day-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.day-card:hover { border-color: #3a3a50; }
+.day-card.completed { border-color: rgba(34,197,94,0.25); }
+.day-card.completed .day-header { opacity: 0.7; }
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.day-check {
+  width: 22px; height: 22px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+}
+
+.day-check:hover { border-color: var(--check); }
+
+.day-check.checked {
+  background: var(--check);
+  border-color: var(--check);
+}
+
+.day-check.checked::after {
+  content: '✓';
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.day-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 48px;
+}
+
+.day-title {
+  font-size: 0.92rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+.day-tags {
+  display: flex; gap: 5px; flex-shrink: 0;
+}
+
+.tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.tag-js { background: rgba(247,223,30,0.12); color: #f7df1e; }
+.tag-react { background: rgba(97,218,251,0.12); color: #61dafb; }
+.tag-node { background: rgba(104,160,99,0.12); color: #68a063; }
+.tag-mongo { background: rgba(77,179,61,0.12); color: #4db33d; }
+.tag-pg { background: rgba(51,103,145,0.15); color: #6b9fcf; }
+.tag-project { background: rgba(255,107,107,0.12); color: #ff6b6b; }
+.tag-dsa { background: rgba(232,121,249,0.12); color: #e879f9; }
+
+.day-expand {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.day-expand.open { transform: rotate(180deg); }
+
+/* Day Body */
+.day-body {
+  display: none;
+  padding: 0 16px 16px 52px;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.day-body.open { display: block; }
+
+.topic-list {
+  list-style: none;
+  margin-bottom: 14px;
+}
+
+.topic-list li {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  padding: 3px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.topic-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.practice-section h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.practice-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.practice-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: all 0.2s;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.practice-link:hover {
+  background: var(--surface2);
+  color: var(--text);
+  border-color: #555;
+  transform: translateY(-1px);
+}
+
+.practice-link .pl-icon { font-size: 0.7rem; }
+
+/* Reset button */
+.reset-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+}
+
+.reset-btn:hover { border-color: #ff6b6b; color: #ff6b6b; }
+
+@media (max-width: 700px) {
+  .day-header { padding: 12px; gap: 8px; }
+  .day-body { padding-left: 16px; }
+  .day-tags { display: none; }
+  .phase-title-bar .phase-range { display: none; }
+  .stats-bar { gap: 8px; }
+  .stat-chip { padding: 6px 12px; font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="app">
+  <header>
+    <h1>Full Stack Developer<br>90-Day Path</h1>
+    <p class="subtitle">JS → React → Node/Express → MongoDB → PostgreSQL → Job Ready</p>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat-chip"><span class="num" id="completedCount">0</span> / <span id="totalCount">0</span> Days Done</div>
+    <div class="stat-chip">🔥 Streak: <span class="num" id="streakCount">0</span></div>
+  </div>
+
+  <div class="progress-wrapper">
+    <div class="progress-header">
+      <span>Overall Progress</span>
+      <span class="pct" id="progressPct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <div class="phase-tabs" id="phaseTabs"></div>
+  <div id="content"></div>
+</div>
+
+<button class="reset-btn" onclick="resetProgress()">↺ Reset Progress</button>
+
+<script>
+const DATA = [
+  {
+    phase: "Phase 1: JavaScript Foundations",
+    icon: "JS",
+    color: "#f7df1e",
+    range: "Day 1–20",
+    days: [
+      {
+        day: 1,
+        title: "JS Basics — Variables, Data Types, Operators",
+        tags: ["js"],
+        topics: ["var vs let vs const", "Primitive types: string, number, boolean, null, undefined, symbol, bigint", "Type coercion & typeof", "Arithmetic, comparison, logical operators"],
+        practice: [
+          { name: "GFG: JS Variables", url: "https://www.geeksforgeeks.org/javascript-variables/" },
+          { name: "HackerRank: Day 0 Data Types", url: "https://www.hackerrank.com/challenges/js10-data-types/problem" },
+          { name: "FCC: Basic JS", url: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/#basic-javascript" }
+        ]
+      },
+      {
+        day: 2,
+        title: "Conditionals & Loops",
+        tags: ["js"],
+        topics: ["if/else, switch-case, ternary", "for, while, do-while", "break, continue", "Nested loops & pattern printing"],
+        practice: [
+          { name: "HackerRank: Loops", url: "https://www.hackerrank.com/challenges/js10-loops/problem" },
+          { name: "CodeChef: Beginner Problems", url: "https://www.codechef.com/practice/javascript" },
+          { name: "GFG: JS Loops", url: "https://www.geeksforgeeks.org/loops-in-javascript/" }
+        ]
+      },
+      {
+        day: 3,
+        title: "Functions — Declaration, Expression, Arrow",
+        tags: ["js"],
+        topics: ["Function declaration vs expression", "Arrow functions", "Default parameters, rest params", "Return values, pure functions"],
+        practice: [
+          { name: "HackerRank: Functions", url: "https://www.hackerrank.com/challenges/js10-function/problem" },
+          { name: "GFG: JS Functions", url: "https://www.geeksforgeeks.org/functions-in-javascript/" },
+          { name: "Codewars: Grasshopper", url: "https://www.codewars.com/kata/55cb632c1a5d7b3ad0000145" }
+        ]
+      },
+      {
+        day: 4,
+        title: "Scope, Hoisting & Closures",
+        tags: ["js"],
+        topics: ["Global vs function vs block scope", "Hoisting behavior for var/let/const/functions", "Closures and lexical environment", "IIFE pattern"],
+        practice: [
+          { name: "GFG: JS Closures", url: "https://www.geeksforgeeks.org/closure-in-javascript/" },
+          { name: "HackerRank: Let & Const", url: "https://www.hackerrank.com/challenges/js10-let-and-const/problem" },
+          { name: "JS.info: Closure Tasks", url: "https://javascript.info/closure#tasks" }
+        ]
+      },
+      {
+        day: 5,
+        title: "Arrays — Methods & Iteration",
+        tags: ["js"],
+        topics: ["push, pop, shift, unshift, splice, slice", "map, filter, reduce, forEach, find, some, every", "Spread operator, destructuring", "Sorting & searching arrays"],
+        practice: [
+          { name: "HackerRank: Arrays", url: "https://www.hackerrank.com/challenges/js10-arrays/problem" },
+          { name: "GFG: JS Array Methods", url: "https://www.geeksforgeeks.org/javascript-array-methods/" },
+          { name: "LeetCode: Two Sum", url: "https://leetcode.com/problems/two-sum/" }
+        ]
+      },
+      {
+        day: 6,
+        title: "Objects — Properties, Methods, this",
+        tags: ["js"],
+        topics: ["Object creation & property access", "this keyword behavior", "Object.keys/values/entries/assign", "Computed property names, shorthand"],
+        practice: [
+          { name: "GFG: JS Objects", url: "https://www.geeksforgeeks.org/javascript-objects/" },
+          { name: "HackerRank: Objects", url: "https://www.hackerrank.com/challenges/js10-objects/problem" },
+          { name: "FCC: Object Challenges", url: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/#basic-data-structures" }
+        ]
+      },
+      {
+        day: 7,
+        title: "Strings & Regular Expressions",
+        tags: ["js", "dsa"],
+        topics: ["String methods: slice, split, replace, includes, trim", "Template literals", "RegExp basics: test, match, replace", "Common patterns: email, phone validation"],
+        practice: [
+          { name: "HackerRank: Strings", url: "https://www.hackerrank.com/challenges/js10-template-literals/problem" },
+          { name: "LeetCode: Valid Palindrome", url: "https://leetcode.com/problems/valid-palindrome/" },
+          { name: "RegexOne: Tutorial", url: "https://regexone.com/" }
+        ]
+      },
+      {
+        day: 8,
+        title: "Higher-Order Functions & Callbacks",
+        tags: ["js"],
+        topics: ["Functions as first-class citizens", "Callback pattern", "Array HOFs deep dive: reduce patterns", "Function composition"],
+        practice: [
+          { name: "HackerRank: HOF", url: "https://www.hackerrank.com/challenges/js10-arrows/problem" },
+          { name: "GFG: Higher Order Functions", url: "https://www.geeksforgeeks.org/higher-order-arrow-functions-in-javascript/" },
+          { name: "Codewars: Functional", url: "https://www.codewars.com/kata/57cc981a58da9e302a000214" }
+        ]
+      },
+      {
+        day: 9,
+        title: "Promises & Async/Await",
+        tags: ["js"],
+        topics: ["Promise creation, then/catch/finally", "Promise.all, Promise.race, Promise.allSettled", "async/await syntax", "Error handling with try/catch in async"],
+        practice: [
+          { name: "GFG: JS Promises", url: "https://www.geeksforgeeks.org/javascript-promises/" },
+          { name: "JS.info: Async Tasks", url: "https://javascript.info/async-await#tasks" },
+          { name: "FCC: Async Challenges", url: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/#es6" }
+        ]
+      },
+      {
+        day: 10,
+        title: "ES6+ Deep Dive — Destructuring, Spread, Modules",
+        tags: ["js"],
+        topics: ["Array & object destructuring", "Spread & rest in depth", "import/export, default vs named", "Optional chaining, nullish coalescing"],
+        practice: [
+          { name: "HackerRank: ES6", url: "https://www.hackerrank.com/challenges/js10-arrows/problem" },
+          { name: "GFG: ES6 Features", url: "https://www.geeksforgeeks.org/introduction-to-es6/" },
+          { name: "Codewars: Destructuring", url: "https://www.codewars.com/kata/525481903700c1a1ff0001e5" }
+        ]
+      },
+      {
+        day: 11,
+        title: "DOM Manipulation Basics",
+        tags: ["js"],
+        topics: ["querySelector, getElementById", "innerHTML, textContent, classList", "createElement, appendChild, removeChild", "Attribute manipulation"],
+        practice: [
+          { name: "GFG: DOM Manipulation", url: "https://www.geeksforgeeks.org/dom-document-object-model/" },
+          { name: "FCC: DOM Projects", url: "https://www.freecodecamp.org/learn/front-end-development-libraries/" },
+          { name: "JS30: Drum Kit", url: "https://javascript30.com/" }
+        ]
+      },
+      {
+        day: 12,
+        title: "Events, Event Delegation & Forms",
+        tags: ["js"],
+        topics: ["addEventListener, event object", "Event bubbling & capturing", "Event delegation pattern", "Form validation with JS"],
+        practice: [
+          { name: "GFG: JS Events", url: "https://www.geeksforgeeks.org/javascript-events/" },
+          { name: "JS30: Event Delegation", url: "https://javascript30.com/" },
+          { name: "HackerRank: Events", url: "https://www.hackerrank.com/challenges/js10-create-a-button/problem" }
+        ]
+      },
+      {
+        day: 13,
+        title: "Fetch API & Working with APIs",
+        tags: ["js"],
+        topics: ["fetch() GET, POST, PUT, DELETE", "Headers & JSON handling", "Error handling for network requests", "Build: Weather App using public API"],
+        practice: [
+          { name: "GFG: Fetch API", url: "https://www.geeksforgeeks.org/javascript-fetch-method/" },
+          { name: "Public APIs List", url: "https://github.com/public-apis/public-apis" },
+          { name: "FCC: APIs & Microservices", url: "https://www.freecodecamp.org/learn/back-end-development-and-apis/" }
+        ]
+      },
+      {
+        day: 14,
+        title: "OOP in JS — Prototypes & Classes",
+        tags: ["js"],
+        topics: ["Constructor functions & new keyword", "Prototypal inheritance chain", "ES6 class syntax", "static, getter/setter, extends, super"],
+        practice: [
+          { name: "GFG: JS Classes", url: "https://www.geeksforgeeks.org/javascript-classes/" },
+          { name: "HackerRank: Inheritance", url: "https://www.hackerrank.com/challenges/js10-class/problem" },
+          { name: "Codewars: OOP Kata", url: "https://www.codewars.com/kata/547f1a8d4a437bbee00000d1" }
+        ]
+      },
+      {
+        day: 15,
+        title: "Error Handling & Debugging",
+        tags: ["js"],
+        topics: ["try/catch/finally patterns", "Custom Error classes", "Chrome DevTools debugging", "console methods, breakpoints, network tab"],
+        practice: [
+          { name: "HackerRank: Try/Catch", url: "https://www.hackerrank.com/challenges/js10-try-catch-and-finally/problem" },
+          { name: "GFG: Error Handling", url: "https://www.geeksforgeeks.org/javascript-error-handling/" },
+          { name: "Chrome DevTools Guide", url: "https://developer.chrome.com/docs/devtools/" }
+        ]
+      },
+      {
+        day: 16,
+        title: "DSA — Arrays & Searching",
+        tags: ["js", "dsa"],
+        topics: ["Linear search, Binary search", "Two pointer technique", "Sliding window basics", "Time & space complexity intro"],
+        practice: [
+          { name: "LeetCode: Binary Search", url: "https://leetcode.com/problems/binary-search/" },
+          { name: "GFG: Two Pointer", url: "https://www.geeksforgeeks.org/two-pointers-technique/" },
+          { name: "HackerRank: Search", url: "https://www.hackerrank.com/challenges/pairs/problem" }
+        ]
+      },
+      {
+        day: 17,
+        title: "DSA — Sorting Algorithms",
+        tags: ["js", "dsa"],
+        topics: ["Bubble sort, Selection sort, Insertion sort", "Merge sort, Quick sort", "Built-in sort with comparators", "Big O comparison of sorts"],
+        practice: [
+          { name: "GFG: Sorting Algorithms", url: "https://www.geeksforgeeks.org/sorting-algorithms/" },
+          { name: "LeetCode: Sort Array", url: "https://leetcode.com/problems/sort-an-array/" },
+          { name: "HackerRank: Sorting", url: "https://www.hackerrank.com/challenges/big-sorting/problem" }
+        ]
+      },
+      {
+        day: 18,
+        title: "DSA — Stacks, Queues & Linked Lists",
+        tags: ["js", "dsa"],
+        topics: ["Stack implementation & applications", "Queue & circular queue", "Singly linked list from scratch", "Common interview patterns"],
+        practice: [
+          { name: "LeetCode: Valid Parentheses", url: "https://leetcode.com/problems/valid-parentheses/" },
+          { name: "GFG: Stack Problems", url: "https://www.geeksforgeeks.org/stack-data-structure/" },
+          { name: "LeetCode: Reverse LL", url: "https://leetcode.com/problems/reverse-linked-list/" }
+        ]
+      },
+      {
+        day: 19,
+        title: "Mini Project — Todo App (Vanilla JS)",
+        tags: ["js", "project"],
+        topics: ["Full CRUD with DOM", "LocalStorage persistence", "Filter & search functionality", "Responsive CSS, animations"],
+        practice: [
+          { name: "Build: TodoMVC", url: "https://todomvc.com/" },
+          { name: "GFG: JS Projects", url: "https://www.geeksforgeeks.org/javascript-projects/" },
+          { name: "FCC: Build Projects", url: "https://www.freecodecamp.org/learn/" }
+        ]
+      },
+      {
+        day: 20,
+        title: "JS Revision Day + Quiz",
+        tags: ["js", "dsa"],
+        topics: ["Review closures, promises, classes", "Mock quiz: 30 JS questions", "Identify weak areas", "Revise array/string DSA patterns"],
+        practice: [
+          { name: "JS Quiz: 50 Questions", url: "https://www.geeksforgeeks.org/javascript-interview-questions-and-answers/" },
+          { name: "LeetCode: Easy Collection", url: "https://leetcode.com/explore/interview/card/top-interview-questions-easy/" },
+          { name: "HackerRank: JS Cert", url: "https://www.hackerrank.com/skills-verification/javascript_basic" }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "Phase 2: React.js Mastery",
+    icon: "⚛",
+    color: "#61dafb",
+    range: "Day 21–42",
+    days: [
+      {
+        day: 21,
+        title: "React Setup — Vite, JSX, Component Basics",
+        tags: ["react"],
+        topics: ["Create project with Vite", "JSX rules & expressions", "Functional components", "Component tree & composition"],
+        practice: [
+          { name: "React Docs: Quick Start", url: "https://react.dev/learn" },
+          { name: "GFG: React Introduction", url: "https://www.geeksforgeeks.org/react/" },
+          { name: "FCC: React Challenges", url: "https://www.freecodecamp.org/learn/front-end-development-libraries/#react" }
+        ]
+      },
+      {
+        day: 22,
+        title: "Props & Component Communication",
+        tags: ["react"],
+        topics: ["Passing props, children prop", "Prop drilling awareness", "Default props, prop types", "Component reusability patterns"],
+        practice: [
+          { name: "React Docs: Props", url: "https://react.dev/learn/passing-props-to-a-component" },
+          { name: "GFG: React Props", url: "https://www.geeksforgeeks.org/reactjs-props-set-1/" },
+          { name: "HackerRank: React Basics", url: "https://www.hackerrank.com/skills-verification/react_basic" }
+        ]
+      },
+      {
+        day: 23,
+        title: "State Management with useState",
+        tags: ["react"],
+        topics: ["useState hook deep dive", "State updates & batching", "Functional updates", "State for arrays & objects"],
+        practice: [
+          { name: "React Docs: State", url: "https://react.dev/learn/state-a-components-memory" },
+          { name: "GFG: useState Hook", url: "https://www.geeksforgeeks.org/reactjs-usestate-hook/" },
+          { name: "Codewars: React Kata", url: "https://www.codewars.com/kata/search/javascript?q=react" }
+        ]
+      },
+      {
+        day: 24,
+        title: "Event Handling & Conditional Rendering",
+        tags: ["react"],
+        topics: ["onClick, onChange, onSubmit", "Synthetic events", "Conditional rendering: &&, ternary, early return", "Rendering lists with key prop"],
+        practice: [
+          { name: "React Docs: Events", url: "https://react.dev/learn/responding-to-events" },
+          { name: "GFG: React Events", url: "https://www.geeksforgeeks.org/react-js-events/" },
+          { name: "FCC: React Events", url: "https://www.freecodecamp.org/learn/front-end-development-libraries/#react" }
+        ]
+      },
+      {
+        day: 25,
+        title: "useEffect — Side Effects & Lifecycle",
+        tags: ["react"],
+        topics: ["useEffect syntax & dependency array", "Cleanup functions", "Fetching data in useEffect", "Common pitfalls: infinite loops"],
+        practice: [
+          { name: "React Docs: Effects", url: "https://react.dev/learn/synchronizing-with-effects" },
+          { name: "GFG: useEffect", url: "https://www.geeksforgeeks.org/reactjs-useeffect-hook/" },
+          { name: "Build: API Data Fetcher", url: "https://www.geeksforgeeks.org/how-to-fetch-data-from-an-api-in-reactjs/" }
+        ]
+      },
+      {
+        day: 26,
+        title: "Forms — Controlled & Uncontrolled Components",
+        tags: ["react"],
+        topics: ["Controlled inputs with state", "useRef for uncontrolled forms", "Form validation patterns", "Multi-field forms with single state"],
+        practice: [
+          { name: "React Docs: Forms", url: "https://react.dev/reference/react-dom/components/input" },
+          { name: "GFG: React Forms", url: "https://www.geeksforgeeks.org/reactjs-controlled-vs-uncontrolled-components/" },
+          { name: "Build: Registration Form", url: "https://www.geeksforgeeks.org/create-a-form-using-reactjs/" }
+        ]
+      },
+      {
+        day: 27,
+        title: "React Router — SPA Navigation",
+        tags: ["react"],
+        topics: ["BrowserRouter, Routes, Route", "Link & NavLink", "useNavigate, useParams, useSearchParams", "Nested routes, layout routes, 404 page"],
+        practice: [
+          { name: "React Router Docs", url: "https://reactrouter.com/en/main/start/tutorial" },
+          { name: "GFG: React Router", url: "https://www.geeksforgeeks.org/reactjs-router/" },
+          { name: "Build: Multi-page App", url: "https://www.geeksforgeeks.org/how-to-create-a-multi-page-website-using-reactjs/" }
+        ]
+      },
+      {
+        day: 28,
+        title: "Styling in React — CSS Modules, Tailwind",
+        tags: ["react"],
+        topics: ["CSS Modules setup", "Tailwind CSS with React", "Styled Components basics", "Responsive design in React"],
+        practice: [
+          { name: "Tailwind Docs", url: "https://tailwindcss.com/docs/installation" },
+          { name: "GFG: React Styling", url: "https://www.geeksforgeeks.org/how-to-use-styles-in-reactjs/" },
+          { name: "Build: Styled Dashboard", url: "https://www.geeksforgeeks.org/create-a-responsive-navbar-using-reactjs/" }
+        ]
+      },
+      {
+        day: 29,
+        title: "useContext — Global State Without Props",
+        tags: ["react"],
+        topics: ["createContext, Provider pattern", "useContext hook", "Theme toggling with context", "Auth context example"],
+        practice: [
+          { name: "React Docs: Context", url: "https://react.dev/learn/passing-data-deeply-with-context" },
+          { name: "GFG: useContext", url: "https://www.geeksforgeeks.org/reactjs-usecontext-hook/" },
+          { name: "Build: Dark Mode Toggle", url: "https://www.geeksforgeeks.org/how-to-create-a-dark-mode-in-reactjs-using-material-ui/" }
+        ]
+      },
+      {
+        day: 30,
+        title: "useReducer & Complex State Logic",
+        tags: ["react"],
+        topics: ["useReducer vs useState", "Dispatch, action, reducer pattern", "Combining useReducer + useContext", "Shopping cart state management"],
+        practice: [
+          { name: "React Docs: useReducer", url: "https://react.dev/reference/react/useReducer" },
+          { name: "GFG: useReducer", url: "https://www.geeksforgeeks.org/reactjs-usereducer-hook/" },
+          { name: "Build: Cart System", url: "https://www.geeksforgeeks.org/create-a-shopping-cart-using-reactjs/" }
+        ]
+      },
+      {
+        day: 31,
+        title: "Custom Hooks — Reusable Logic",
+        tags: ["react"],
+        topics: ["Extracting logic into custom hooks", "useFetch, useLocalStorage, useDebounce", "Rules of hooks", "Testing custom hooks"],
+        practice: [
+          { name: "React Docs: Custom Hooks", url: "https://react.dev/learn/reusing-logic-with-custom-hooks" },
+          { name: "GFG: Custom Hooks", url: "https://www.geeksforgeeks.org/reactjs-custom-hooks/" },
+          { name: "useHooks Collection", url: "https://usehooks.com/" }
+        ]
+      },
+      {
+        day: 32,
+        title: "Performance — memo, useMemo, useCallback",
+        tags: ["react"],
+        topics: ["React.memo for component memoization", "useMemo for expensive calculations", "useCallback for stable references", "React DevTools Profiler"],
+        practice: [
+          { name: "React Docs: Performance", url: "https://react.dev/reference/react/memo" },
+          { name: "GFG: React Performance", url: "https://www.geeksforgeeks.org/how-to-optimize-the-performance-of-react-app/" },
+          { name: "Build: Optimized List", url: "https://www.geeksforgeeks.org/what-is-memoization-in-react/" }
+        ]
+      },
+      {
+        day: 33,
+        title: "React Project 1 — Movie Search App",
+        tags: ["react", "project"],
+        topics: ["OMDB/TMDB API integration", "Search with debounce", "Loading states, error handling", "Responsive card grid"],
+        practice: [
+          { name: "TMDB API Docs", url: "https://developer.themoviedb.org/docs" },
+          { name: "GFG: Movie App", url: "https://www.geeksforgeeks.org/how-to-build-a-movie-app-with-reactjs/" },
+          { name: "Build & Deploy", url: "https://www.freecodecamp.org/news/react-movie-app-tutorial/" }
+        ]
+      },
+      {
+        day: 34,
+        title: "State Management — Redux Toolkit Intro",
+        tags: ["react"],
+        topics: ["Redux concepts: store, slice, reducer", "configureStore, createSlice", "useSelector, useDispatch", "Redux DevTools"],
+        practice: [
+          { name: "Redux Toolkit Docs", url: "https://redux-toolkit.js.org/tutorials/quick-start" },
+          { name: "GFG: Redux Toolkit", url: "https://www.geeksforgeeks.org/redux-toolkit/" },
+          { name: "FCC: Redux", url: "https://www.freecodecamp.org/learn/front-end-development-libraries/#redux" }
+        ]
+      },
+      {
+        day: 35,
+        title: "Redux Toolkit — Async Thunks & RTK Query",
+        tags: ["react"],
+        topics: ["createAsyncThunk for API calls", "extraReducers, loading/error states", "RTK Query basics: createApi", "Cache invalidation"],
+        practice: [
+          { name: "RTK Query Docs", url: "https://redux-toolkit.js.org/rtk-query/overview" },
+          { name: "GFG: Async Thunk", url: "https://www.geeksforgeeks.org/redux-thunk/" },
+          { name: "Build: Blog with RTK Query", url: "https://redux-toolkit.js.org/tutorials/rtk-query" }
+        ]
+      },
+      {
+        day: 36,
+        title: "DSA Day — Hash Maps & Sets in JS",
+        tags: ["js", "dsa"],
+        topics: ["Map & Set in JavaScript", "Frequency counter pattern", "Anagram, duplicate detection", "Two Sum optimal solution"],
+        practice: [
+          { name: "LeetCode: Group Anagrams", url: "https://leetcode.com/problems/group-anagrams/" },
+          { name: "LeetCode: Contains Duplicate", url: "https://leetcode.com/problems/contains-duplicate/" },
+          { name: "GFG: Hashing Problems", url: "https://www.geeksforgeeks.org/hashing-data-structure/" }
+        ]
+      },
+      {
+        day: 37,
+        title: "Testing React — Jest & React Testing Library",
+        tags: ["react"],
+        topics: ["Jest basics: describe, it, expect", "RTL: render, screen, fireEvent", "Testing user interactions", "Mocking API calls"],
+        practice: [
+          { name: "RTL Docs", url: "https://testing-library.com/docs/react-testing-library/intro/" },
+          { name: "GFG: React Testing", url: "https://www.geeksforgeeks.org/testing-in-react-js/" },
+          { name: "Kent C Dodds Blog", url: "https://kentcdodds.com/blog/common-mistakes-with-react-testing-library" }
+        ]
+      },
+      {
+        day: 38,
+        title: "React Project 2 — E-Commerce Product Page",
+        tags: ["react", "project"],
+        topics: ["Product listing with filters", "Shopping cart with useReducer", "React Router for product details", "Local Storage persistence"],
+        practice: [
+          { name: "FakeStore API", url: "https://fakestoreapi.com/docs" },
+          { name: "GFG: E-Commerce React", url: "https://www.geeksforgeeks.org/how-to-create-a-basic-ecommerce-app-using-reactjs/" },
+          { name: "Build: Full Store", url: "https://www.freecodecamp.org/news/how-to-build-an-ecommerce-app-with-react/" }
+        ]
+      },
+      {
+        day: 39,
+        title: "TypeScript Basics for React",
+        tags: ["react"],
+        topics: ["TS types: string, number, boolean, array, object", "Interfaces vs Types", "Typing props, state, events in React", "Generics basics"],
+        practice: [
+          { name: "TS Handbook", url: "https://www.typescriptlang.org/docs/handbook/intro.html" },
+          { name: "GFG: TypeScript", url: "https://www.geeksforgeeks.org/introduction-to-typescript/" },
+          { name: "React TS Cheatsheet", url: "https://react-typescript-cheatsheet.netlify.app/" }
+        ]
+      },
+      {
+        day: 40,
+        title: "Deployment — Vercel, Netlify, GitHub Pages",
+        tags: ["react"],
+        topics: ["Building for production", "Deploy to Vercel/Netlify", "Environment variables", "CI/CD basics with GitHub Actions"],
+        practice: [
+          { name: "Vercel Docs", url: "https://vercel.com/docs" },
+          { name: "Netlify Docs", url: "https://docs.netlify.com/" },
+          { name: "GFG: Deploy React", url: "https://www.geeksforgeeks.org/how-to-deploy-react-app-on-vercel/" }
+        ]
+      },
+      {
+        day: 41,
+        title: "DSA — Recursion & Trees",
+        tags: ["dsa"],
+        topics: ["Recursion fundamentals", "Binary tree traversals (in/pre/post)", "BFS vs DFS", "Common tree interview problems"],
+        practice: [
+          { name: "LeetCode: Max Depth Tree", url: "https://leetcode.com/problems/maximum-depth-of-binary-tree/" },
+          { name: "GFG: Recursion Problems", url: "https://www.geeksforgeeks.org/recursion-practice-problems-solutions/" },
+          { name: "LeetCode: Invert Tree", url: "https://leetcode.com/problems/invert-binary-tree/" }
+        ]
+      },
+      {
+        day: 42,
+        title: "React Revision & Portfolio Setup",
+        tags: ["react", "project"],
+        topics: ["Revise hooks, routing, state management", "Set up portfolio website with React", "Showcase 2-3 projects built so far", "Responsive, animated portfolio"],
+        practice: [
+          { name: "GFG: React Portfolio", url: "https://www.geeksforgeeks.org/how-to-create-a-portfolio-in-react-js/" },
+          { name: "React Interview Qs", url: "https://www.geeksforgeeks.org/react-interview-questions/" },
+          { name: "HackerRank: React Cert", url: "https://www.hackerrank.com/skills-verification/react_basic" }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "Phase 3: Node.js & Express.js Backend",
+    icon: "N",
+    color: "#68a063",
+    range: "Day 43–60",
+    days: [
+      {
+        day: 43,
+        title: "Node.js Intro — Runtime, Modules, npm",
+        tags: ["node"],
+        topics: ["Node.js architecture & event loop", "CommonJS vs ES modules", "npm init, package.json", "Built-in modules: fs, path, os"],
+        practice: [
+          { name: "GFG: Node.js Intro", url: "https://www.geeksforgeeks.org/introduction-to-nodejs/" },
+          { name: "FCC: Node & Express", url: "https://www.freecodecamp.org/learn/back-end-development-and-apis/" },
+          { name: "HackerRank: Node Basics", url: "https://www.hackerrank.com/domains/nodejs" }
+        ]
+      },
+      {
+        day: 44,
+        title: "File System & Streams",
+        tags: ["node"],
+        topics: ["fs.readFile, fs.writeFile, fs.appendFile", "Sync vs Async file operations", "Streams: readable, writable, pipe", "CSV/JSON file processing"],
+        practice: [
+          { name: "GFG: Node FS", url: "https://www.geeksforgeeks.org/node-js-file-system/" },
+          { name: "Node Docs: FS", url: "https://nodejs.org/api/fs.html" },
+          { name: "Build: Log Parser", url: "https://www.geeksforgeeks.org/node-js-stream-writable-write-method/" }
+        ]
+      },
+      {
+        day: 45,
+        title: "HTTP Module & Basic Server",
+        tags: ["node"],
+        topics: ["http.createServer", "Request & response objects", "Routing without framework", "Serving static files & JSON"],
+        practice: [
+          { name: "GFG: Node HTTP", url: "https://www.geeksforgeeks.org/node-js-http-module/" },
+          { name: "FCC: HTTP Server", url: "https://www.freecodecamp.org/learn/back-end-development-and-apis/#basic-node-and-express" },
+          { name: "Build: Raw HTTP Server", url: "https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" }
+        ]
+      },
+      {
+        day: 46,
+        title: "Express.js — Setup, Routing, Middleware",
+        tags: ["node"],
+        topics: ["Express setup, app.get/post/put/delete", "Route parameters & query strings", "Middleware concept: app.use", "Built-in middleware: json, urlencoded, static"],
+        practice: [
+          { name: "Express Docs", url: "https://expressjs.com/en/starter/installing.html" },
+          { name: "GFG: Express.js", url: "https://www.geeksforgeeks.org/express-js/" },
+          { name: "FCC: Express Challenges", url: "https://www.freecodecamp.org/learn/back-end-development-and-apis/#basic-node-and-express" }
+        ]
+      },
+      {
+        day: 47,
+        title: "Express — Custom Middleware & Error Handling",
+        tags: ["node"],
+        topics: ["Writing custom middleware", "Logger, auth checker middleware", "Error handling middleware", "express-async-handler / express-async-errors"],
+        practice: [
+          { name: "GFG: Express Middleware", url: "https://www.geeksforgeeks.org/middleware-in-express-js/" },
+          { name: "Express Error Handling", url: "https://expressjs.com/en/guide/error-handling.html" },
+          { name: "Build: Logger MW", url: "https://www.geeksforgeeks.org/how-to-create-custom-middleware-in-express-js/" }
+        ]
+      },
+      {
+        day: 48,
+        title: "RESTful API Design Principles",
+        tags: ["node"],
+        topics: ["REST constraints & best practices", "Resource naming, HTTP verbs", "Status codes: 200, 201, 400, 401, 404, 500", "API versioning, pagination"],
+        practice: [
+          { name: "GFG: REST API Design", url: "https://www.geeksforgeeks.org/rest-api-introduction/" },
+          { name: "Build: CRUD API", url: "https://www.geeksforgeeks.org/build-a-rest-api-using-node-express-and-mongodb/" },
+          { name: "RESTful API Tutorial", url: "https://restfulapi.net/" }
+        ]
+      },
+      {
+        day: 49,
+        title: "Express — CRUD API with In-Memory Data",
+        tags: ["node", "project"],
+        topics: ["Full CRUD for a resource (users/todos)", "Input validation with Joi/express-validator", "Postman/Thunder Client testing", "Project structure: routes, controllers"],
+        practice: [
+          { name: "GFG: CRUD Express", url: "https://www.geeksforgeeks.org/how-to-build-a-simple-crud-app-with-node-js-and-expressjs/" },
+          { name: "Postman Learning", url: "https://learning.postman.com/docs/getting-started/introduction/" },
+          { name: "Express Validator", url: "https://express-validator.github.io/docs/" }
+        ]
+      },
+      {
+        day: 50,
+        title: "Authentication — JWT & bcrypt",
+        tags: ["node"],
+        topics: ["Password hashing with bcryptjs", "JWT creation & verification", "Protect routes with auth middleware", "Token refresh strategy"],
+        practice: [
+          { name: "GFG: JWT Auth", url: "https://www.geeksforgeeks.org/json-web-token-jwt/" },
+          { name: "Build: Auth System", url: "https://www.geeksforgeeks.org/jwt-authentication-with-node-js/" },
+          { name: "JWT.io", url: "https://jwt.io/introduction" }
+        ]
+      },
+      {
+        day: 51,
+        title: "File Upload — Multer & Cloudinary",
+        tags: ["node"],
+        topics: ["Multer setup for file uploads", "File size & type validation", "Cloudinary integration for image hosting", "Profile picture upload flow"],
+        practice: [
+          { name: "GFG: Multer Upload", url: "https://www.geeksforgeeks.org/file-uploading-in-node-js/" },
+          { name: "Cloudinary Docs", url: "https://cloudinary.com/documentation/node_integration" },
+          { name: "Build: Image Uploader", url: "https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/" }
+        ]
+      },
+      {
+        day: 52,
+        title: "Email & Notifications — Nodemailer",
+        tags: ["node"],
+        topics: ["Nodemailer setup", "Send email verification", "Password reset flow", "Rate limiting with express-rate-limit"],
+        practice: [
+          { name: "GFG: Nodemailer", url: "https://www.geeksforgeeks.org/how-to-send-email-using-node-js/" },
+          { name: "Nodemailer Docs", url: "https://nodemailer.com/about/" },
+          { name: "Build: Email Verify", url: "https://www.geeksforgeeks.org/how-to-send-email-verification-link-with-firebase-using-reactjs/" }
+        ]
+      },
+      {
+        day: 53,
+        title: "Real-time — Socket.io Basics",
+        tags: ["node"],
+        topics: ["WebSocket vs HTTP", "Socket.io server & client setup", "Events: emit, on, broadcast", "Build: Live chat room"],
+        practice: [
+          { name: "Socket.io Docs", url: "https://socket.io/docs/v4/" },
+          { name: "GFG: Socket.io", url: "https://www.geeksforgeeks.org/introduction-to-sockets-io-in-node-js/" },
+          { name: "Build: Chat App", url: "https://socket.io/get-started/chat" }
+        ]
+      },
+      {
+        day: 54,
+        title: "API Security — Helmet, CORS, Sanitization",
+        tags: ["node"],
+        topics: ["Helmet.js security headers", "CORS configuration", "Data sanitization: xss-clean, mongo-sanitize", "HPP (HTTP Parameter Pollution)"],
+        practice: [
+          { name: "GFG: Node Security", url: "https://www.geeksforgeeks.org/how-to-secure-your-nodejs-application/" },
+          { name: "Helmet.js Docs", url: "https://helmetjs.github.io/" },
+          { name: "OWASP Node Guide", url: "https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html" }
+        ]
+      },
+      {
+        day: 55,
+        title: "Caching, Logging & Environment Config",
+        tags: ["node"],
+        topics: ["dotenv for config management", "Winston/Morgan for logging", "Redis basics for caching", "Graceful error handling patterns"],
+        practice: [
+          { name: "GFG: dotenv", url: "https://www.geeksforgeeks.org/how-to-use-environment-variables-in-node-js/" },
+          { name: "Winston Docs", url: "https://github.com/winstonjs/winston" },
+          { name: "Build: Config Setup", url: "https://www.geeksforgeeks.org/how-to-set-up-rate-limiting-and-speed-limiting-in-express/" }
+        ]
+      },
+      {
+        day: 56,
+        title: "DSA — Graphs & BFS/DFS",
+        tags: ["dsa"],
+        topics: ["Graph representation: adj list/matrix", "BFS & DFS traversal", "Shortest path basics", "Common graph interview problems"],
+        practice: [
+          { name: "LeetCode: Number of Islands", url: "https://leetcode.com/problems/number-of-islands/" },
+          { name: "GFG: Graph Traversals", url: "https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/" },
+          { name: "LeetCode: Clone Graph", url: "https://leetcode.com/problems/clone-graph/" }
+        ]
+      },
+      {
+        day: 57,
+        title: "API Documentation — Swagger/OpenAPI",
+        tags: ["node"],
+        topics: ["Swagger UI setup with swagger-jsdoc", "Writing API documentation", "Schema definitions", "Interactive API testing"],
+        practice: [
+          { name: "Swagger Docs", url: "https://swagger.io/docs/specification/about/" },
+          { name: "GFG: Swagger Express", url: "https://www.geeksforgeeks.org/how-to-document-an-express-api-with-swagger-ui-and-jsdoc/" },
+          { name: "Build: Documented API", url: "https://www.npmjs.com/package/swagger-jsdoc" }
+        ]
+      },
+      {
+        day: 58,
+        title: "Testing Backend — Jest & Supertest",
+        tags: ["node"],
+        topics: ["Unit testing with Jest", "Integration tests with Supertest", "Mocking database calls", "Test coverage reports"],
+        practice: [
+          { name: "GFG: Node Testing", url: "https://www.geeksforgeeks.org/testing-in-node-js/" },
+          { name: "Supertest Docs", url: "https://github.com/visionmedia/supertest" },
+          { name: "Jest Docs", url: "https://jestjs.io/docs/getting-started" }
+        ]
+      },
+      {
+        day: 59,
+        title: "Express Project — Blog API (Part 1)",
+        tags: ["node", "project"],
+        topics: ["Project setup & folder structure", "User model, auth routes", "Post CRUD routes", "Middleware: auth, validation, error"],
+        practice: [
+          { name: "GFG: Blog API", url: "https://www.geeksforgeeks.org/how-to-build-a-node-js-api-for-a-blog/" },
+          { name: "Build: REST Blog", url: "https://www.freecodecamp.org/news/building-a-simple-crud-application-with-express-and-mongodb/" },
+          { name: "Express Best Practices", url: "https://expressjs.com/en/advanced/best-practice-performance.html" }
+        ]
+      },
+      {
+        day: 60,
+        title: "Express Project — Blog API (Part 2: Deploy)",
+        tags: ["node", "project"],
+        topics: ["Comment system", "Pagination & search", "Deploy to Railway/Render", "Connect to production DB"],
+        practice: [
+          { name: "Render Docs", url: "https://render.com/docs" },
+          { name: "Railway Docs", url: "https://docs.railway.app/" },
+          { name: "GFG: Deploy Node", url: "https://www.geeksforgeeks.org/how-to-deploy-node-js-app-on-heroku-from-github/" }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "Phase 4: MongoDB & Mongoose",
+    icon: "M",
+    color: "#4db33d",
+    range: "Day 61–72",
+    days: [
+      {
+        day: 61,
+        title: "MongoDB Basics — Install, CRUD, Shell",
+        tags: ["mongo"],
+        topics: ["MongoDB vs SQL databases", "MongoDB Atlas setup", "mongosh: insertOne, find, updateOne, deleteOne", "Documents, collections, databases"],
+        practice: [
+          { name: "MongoDB University", url: "https://learn.mongodb.com/" },
+          { name: "GFG: MongoDB Intro", url: "https://www.geeksforgeeks.org/mongodb-an-introduction/" },
+          { name: "GFG: MongoDB CRUD", url: "https://www.geeksforgeeks.org/mongodb-crud-operations/" }
+        ]
+      },
+      {
+        day: 62,
+        title: "Mongoose — Schemas, Models, Validation",
+        tags: ["mongo", "node"],
+        topics: ["Mongoose connection & schemas", "Schema types, required, default, enum", "Custom validators", "Model.create, find, findById, update, delete"],
+        practice: [
+          { name: "Mongoose Docs", url: "https://mongoosejs.com/docs/guide.html" },
+          { name: "GFG: Mongoose", url: "https://www.geeksforgeeks.org/mongoose/" },
+          { name: "Build: User Model", url: "https://www.geeksforgeeks.org/mongoose-schemas-creating-a-model/" }
+        ]
+      },
+      {
+        day: 63,
+        title: "Mongoose — Relations & Population",
+        tags: ["mongo", "node"],
+        topics: ["Embedding vs Referencing", "ObjectId references", "populate() for joins", "Virtual populate, pre/post hooks"],
+        practice: [
+          { name: "GFG: Mongoose Populate", url: "https://www.geeksforgeeks.org/mongoose-populate-method/" },
+          { name: "Mongoose: Populate", url: "https://mongoosejs.com/docs/populate.html" },
+          { name: "Build: Blog with Refs", url: "https://www.geeksforgeeks.org/mongoose-populate-method/" }
+        ]
+      },
+      {
+        day: 64,
+        title: "MongoDB Aggregation Pipeline",
+        tags: ["mongo"],
+        topics: ["$match, $group, $sort, $project", "$lookup for joins", "$unwind, $addFields", "Pagination with aggregation"],
+        practice: [
+          { name: "MongoDB Aggregation", url: "https://www.mongodb.com/docs/manual/aggregation/" },
+          { name: "GFG: Aggregation", url: "https://www.geeksforgeeks.org/aggregation-in-mongodb/" },
+          { name: "MongoDB Exercises", url: "https://learn.mongodb.com/" }
+        ]
+      },
+      {
+        day: 65,
+        title: "MongoDB Indexing & Performance",
+        tags: ["mongo"],
+        topics: ["Single & compound indexes", "Text indexes for search", "explain() for query analysis", "Index strategies for performance"],
+        practice: [
+          { name: "GFG: MongoDB Indexing", url: "https://www.geeksforgeeks.org/mongodb-indexing/" },
+          { name: "MongoDB: Indexes", url: "https://www.mongodb.com/docs/manual/indexes/" },
+          { name: "Performance Tuning", url: "https://www.mongodb.com/docs/manual/administration/optimization/" }
+        ]
+      },
+      {
+        day: 66,
+        title: "Full MERN CRUD — Express + MongoDB",
+        tags: ["mongo", "node", "project"],
+        topics: ["Connect Express to MongoDB Atlas", "CRUD API with Mongoose models", "Error handling, validation", "Test with Postman"],
+        practice: [
+          { name: "GFG: MERN CRUD", url: "https://www.geeksforgeeks.org/build-a-rest-api-using-node-express-and-mongodb/" },
+          { name: "FCC: MongoDB + Mongoose", url: "https://www.freecodecamp.org/learn/back-end-development-and-apis/#mongodb-and-mongoose" },
+          { name: "Build: Full API", url: "https://www.geeksforgeeks.org/how-to-build-a-simple-crud-app-with-node-js-and-expressjs/" }
+        ]
+      },
+      {
+        day: 67,
+        title: "MERN Auth — Register/Login/Protected Routes",
+        tags: ["mongo", "node", "react"],
+        topics: ["User model with hashed password", "Login/Register endpoints", "JWT in React: localStorage/httpOnly cookie", "Protected routes on frontend"],
+        practice: [
+          { name: "GFG: MERN Auth", url: "https://www.geeksforgeeks.org/mern-stack-authentication-tutorial/" },
+          { name: "Build: Full Auth", url: "https://www.geeksforgeeks.org/how-to-build-a-login-system-with-mern-stack/" },
+          { name: "Secure Auth Patterns", url: "https://www.geeksforgeeks.org/how-to-create-protected-routes-in-react-using-react-router/" }
+        ]
+      },
+      {
+        day: 68,
+        title: "MERN Project — Task Manager (Part 1)",
+        tags: ["mongo", "node", "react", "project"],
+        topics: ["Backend: Task model, CRUD API, auth", "Frontend: React setup, API service", "Task list, create, update, delete UI", "User dashboard"],
+        practice: [
+          { name: "GFG: MERN Todo", url: "https://www.geeksforgeeks.org/mern-stack-todo-app/" },
+          { name: "Build: Task Manager", url: "https://www.geeksforgeeks.org/how-to-create-a-task-manager-using-mern-stack/" },
+          { name: "MERN Template", url: "https://github.com/bradtraversy/mern-tutorial" }
+        ]
+      },
+      {
+        day: 69,
+        title: "MERN Project — Task Manager (Part 2)",
+        tags: ["mongo", "node", "react", "project"],
+        topics: ["Drag-and-drop with react-beautiful-dnd", "Filter by status, priority, date", "User profile & settings page", "Deploy full stack"],
+        practice: [
+          { name: "DnD Library", url: "https://github.com/atlassian/react-beautiful-dnd" },
+          { name: "Deploy MERN", url: "https://www.geeksforgeeks.org/how-to-deploy-mern-application-on-vercel/" },
+          { name: "Vercel + Render", url: "https://render.com/docs/deploy-mern" }
+        ]
+      },
+      {
+        day: 70,
+        title: "DSA — Dynamic Programming Basics",
+        tags: ["dsa"],
+        topics: ["Memoization vs Tabulation", "Fibonacci, Climbing Stairs", "Coin Change problem", "Longest Common Subsequence"],
+        practice: [
+          { name: "LeetCode: Climbing Stairs", url: "https://leetcode.com/problems/climbing-stairs/" },
+          { name: "LeetCode: Coin Change", url: "https://leetcode.com/problems/coin-change/" },
+          { name: "GFG: DP Problems", url: "https://www.geeksforgeeks.org/dynamic-programming/" }
+        ]
+      },
+      {
+        day: 71,
+        title: "MongoDB Transactions & Advanced Patterns",
+        tags: ["mongo"],
+        topics: ["ACID transactions in MongoDB", "Multi-document transactions", "Schema design patterns: bucket, subset", "Change streams"],
+        practice: [
+          { name: "MongoDB Transactions", url: "https://www.mongodb.com/docs/manual/core/transactions/" },
+          { name: "GFG: MongoDB Transactions", url: "https://www.geeksforgeeks.org/mongodb-transactions/" },
+          { name: "Schema Patterns", url: "https://www.mongodb.com/blog/post/building-with-patterns-a-summary" }
+        ]
+      },
+      {
+        day: 72,
+        title: "MongoDB Revision & Practice",
+        tags: ["mongo", "dsa"],
+        topics: ["Revise aggregation, indexing, transactions", "Practice MongoDB interview questions", "Optimize existing project queries", "DSA: 5 medium LeetCode problems"],
+        practice: [
+          { name: "GFG: MongoDB Interview", url: "https://www.geeksforgeeks.org/mongodb-interview-questions/" },
+          { name: "LeetCode: Medium Set", url: "https://leetcode.com/problemset/all/?difficulty=MEDIUM" },
+          { name: "MongoDB Quizzes", url: "https://learn.mongodb.com/" }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "Phase 5: PostgreSQL & Prisma/Sequelize",
+    icon: "PG",
+    color: "#336791",
+    range: "Day 73–82",
+    days: [
+      {
+        day: 73,
+        title: "PostgreSQL Basics — SQL Fundamentals",
+        tags: ["pg"],
+        topics: ["PostgreSQL install & pgAdmin", "CREATE TABLE, INSERT, SELECT", "WHERE, ORDER BY, LIMIT, OFFSET", "Data types: serial, varchar, int, timestamp, boolean"],
+        practice: [
+          { name: "GFG: PostgreSQL Intro", url: "https://www.geeksforgeeks.org/what-is-postgresql-introduction/" },
+          { name: "SQLZoo: Tutorials", url: "https://sqlzoo.net/wiki/SQL_Tutorial" },
+          { name: "HackerRank: SQL", url: "https://www.hackerrank.com/domains/sql" }
+        ]
+      },
+      {
+        day: 74,
+        title: "SQL — Joins, Subqueries, Aggregates",
+        tags: ["pg"],
+        topics: ["INNER, LEFT, RIGHT, FULL joins", "Subqueries & CTEs", "GROUP BY, HAVING, COUNT, SUM, AVG", "DISTINCT, UNION, INTERSECT"],
+        practice: [
+          { name: "HackerRank: SQL Joins", url: "https://www.hackerrank.com/challenges/african-cities/problem" },
+          { name: "GFG: SQL Joins", url: "https://www.geeksforgeeks.org/sql-join-set-1-inner-left-right-and-full-joins/" },
+          { name: "LeetCode: SQL 50", url: "https://leetcode.com/studyplan/top-sql-50/" }
+        ]
+      },
+      {
+        day: 75,
+        title: "PostgreSQL — Constraints, Indexes, Views",
+        tags: ["pg"],
+        topics: ["PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK", "CREATE INDEX, composite indexes", "Views & materialized views", "Sequences & auto-increment"],
+        practice: [
+          { name: "GFG: PG Constraints", url: "https://www.geeksforgeeks.org/postgresql-constraints/" },
+          { name: "PostgreSQL Docs", url: "https://www.postgresql.org/docs/current/ddl-constraints.html" },
+          { name: "HackerRank: Advanced SQL", url: "https://www.hackerrank.com/domains/sql?filters%5Bsubdomains%5D%5B%5D=advanced-select" }
+        ]
+      },
+      {
+        day: 76,
+        title: "Node.js + PostgreSQL — pg & Connection Pooling",
+        tags: ["pg", "node"],
+        topics: ["pg (node-postgres) library", "Connection pooling", "Parameterized queries (SQL injection prevention)", "CRUD operations from Node.js"],
+        practice: [
+          { name: "node-postgres Docs", url: "https://node-postgres.com/" },
+          { name: "GFG: Node + PostgreSQL", url: "https://www.geeksforgeeks.org/postgresql-connecting-to-the-database-using-node-js/" },
+          { name: "Build: PG CRUD API", url: "https://www.geeksforgeeks.org/nodejs-crud-operations-with-postgresql/" }
+        ]
+      },
+      {
+        day: 77,
+        title: "Prisma ORM — Setup, Schema, Migrations",
+        tags: ["pg", "node"],
+        topics: ["Prisma init & schema.prisma", "Models, relations, enums", "prisma migrate dev", "Prisma Client: create, findMany, update, delete"],
+        practice: [
+          { name: "Prisma Docs", url: "https://www.prisma.io/docs/getting-started" },
+          { name: "GFG: Prisma ORM", url: "https://www.geeksforgeeks.org/what-is-prisma/" },
+          { name: "Prisma Quickstart", url: "https://www.prisma.io/docs/getting-started/quickstart" }
+        ]
+      },
+      {
+        day: 78,
+        title: "Prisma — Relations, Filtering, Transactions",
+        tags: ["pg", "node"],
+        topics: ["One-to-many, many-to-many relations", "where, include, select, orderBy", "Prisma transactions", "Seeding data"],
+        practice: [
+          { name: "Prisma Relations", url: "https://www.prisma.io/docs/concepts/components/prisma-schema/relations" },
+          { name: "Prisma Filtering", url: "https://www.prisma.io/docs/concepts/components/prisma-client/filtering-and-sorting" },
+          { name: "Build: Blog with Prisma", url: "https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch" }
+        ]
+      },
+      {
+        day: 79,
+        title: "Express + Prisma + PostgreSQL API",
+        tags: ["pg", "node", "project"],
+        topics: ["Full REST API with Prisma + Express", "User auth with PostgreSQL", "Role-based access control", "Pagination, search, sorting"],
+        practice: [
+          { name: "Build: Prisma REST", url: "https://www.prisma.io/docs/concepts/components/prisma-client/crud" },
+          { name: "GFG: Express Prisma", url: "https://www.geeksforgeeks.org/how-to-use-prisma-with-express-js/" },
+          { name: "Prisma + Express Tutorial", url: "https://www.prisma.io/express" }
+        ]
+      },
+      {
+        day: 80,
+        title: "MongoDB vs PostgreSQL — When to Use What",
+        tags: ["mongo", "pg"],
+        topics: ["Document vs Relational model", "When to choose MongoDB", "When to choose PostgreSQL", "Hybrid architecture patterns"],
+        practice: [
+          { name: "GFG: MongoDB vs PostgreSQL", url: "https://www.geeksforgeeks.org/difference-between-mongodb-and-postgresql/" },
+          { name: "Design Comparison", url: "https://www.geeksforgeeks.org/sql-vs-nosql-which-one-is-better-to-use/" },
+          { name: "System Design Basics", url: "https://www.geeksforgeeks.org/system-design-tutorial/" }
+        ]
+      },
+      {
+        day: 81,
+        title: "DSA — Greedy & Backtracking",
+        tags: ["dsa"],
+        topics: ["Greedy algorithm patterns", "Activity selection, Huffman coding", "Backtracking: N-Queens, Sudoku solver", "When to use greedy vs DP"],
+        practice: [
+          { name: "LeetCode: Jump Game", url: "https://leetcode.com/problems/jump-game/" },
+          { name: "GFG: Greedy Algorithms", url: "https://www.geeksforgeeks.org/greedy-algorithms/" },
+          { name: "LeetCode: N-Queens", url: "https://leetcode.com/problems/n-queens/" }
+        ]
+      },
+      {
+        day: 82,
+        title: "PostgreSQL Revision & SQL Practice",
+        tags: ["pg", "dsa"],
+        topics: ["Revise joins, aggregations, Prisma", "HackerRank SQL challenges", "Optimize queries with EXPLAIN ANALYZE", "DSA: 5 medium problems"],
+        practice: [
+          { name: "HackerRank: SQL Kit", url: "https://www.hackerrank.com/domains/sql" },
+          { name: "LeetCode: SQL 50", url: "https://leetcode.com/studyplan/top-sql-50/" },
+          { name: "GFG: PG Interview Qs", url: "https://www.geeksforgeeks.org/postgresql-interview-questions/" }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "Phase 6: Capstone & Job Prep",
+    icon: "🚀",
+    color: "#ff6b6b",
+    range: "Day 83–90",
+    days: [
+      {
+        day: 83,
+        title: "Capstone Project — Full Stack App (Day 1)",
+        tags: ["react", "node", "mongo", "pg", "project"],
+        topics: ["Choose project: Job Board / Social Media / E-Commerce", "Plan features, DB schema, API design", "Set up monorepo or separate repos", "Backend: Models, auth, core CRUD"],
+        practice: [
+          { name: "GFG: Full Stack Projects", url: "https://www.geeksforgeeks.org/top-mern-stack-project-ideas/" },
+          { name: "Project Ideas", url: "https://www.geeksforgeeks.org/web-development-projects/" },
+          { name: "System Design", url: "https://www.geeksforgeeks.org/system-design-tutorial/" }
+        ]
+      },
+      {
+        day: 84,
+        title: "Capstone Project (Day 2) — Backend Complete",
+        tags: ["node", "mongo", "pg", "project"],
+        topics: ["Complete all API endpoints", "File upload, email notifications", "Input validation & error handling", "API documentation with Swagger"],
+        practice: [
+          { name: "Express Best Practices", url: "https://expressjs.com/en/advanced/best-practice-performance.html" },
+          { name: "API Security Checklist", url: "https://github.com/shieldfy/API-Security-Checklist" },
+          { name: "Node.js Patterns", url: "https://www.geeksforgeeks.org/node-js-design-patterns/" }
+        ]
+      },
+      {
+        day: 85,
+        title: "Capstone Project (Day 3) — Frontend Complete",
+        tags: ["react", "project"],
+        topics: ["All pages with React Router", "State management (Redux/Context)", "Responsive design, loading states", "Connect frontend to backend API"],
+        practice: [
+          { name: "React Patterns", url: "https://www.patterns.dev/" },
+          { name: "GFG: React Best Practices", url: "https://www.geeksforgeeks.org/reactjs-best-practices/" },
+          { name: "Responsive Design", url: "https://web.dev/responsive-web-design-basics/" }
+        ]
+      },
+      {
+        day: 86,
+        title: "Capstone Project (Day 4) — Polish & Deploy",
+        tags: ["react", "node", "project"],
+        topics: ["Testing critical flows", "Performance optimization", "Deploy: Vercel (frontend) + Render (backend)", "Environment variables, CORS setup"],
+        practice: [
+          { name: "Web Performance", url: "https://web.dev/performance/" },
+          { name: "Lighthouse Audit", url: "https://developer.chrome.com/docs/lighthouse/" },
+          { name: "Deploy Checklist", url: "https://www.geeksforgeeks.org/best-practices-for-deploying-node-js-apps/" }
+        ]
+      },
+      {
+        day: 87,
+        title: "Portfolio & Resume — Showcase Your Work",
+        tags: ["project"],
+        topics: ["Update portfolio with all projects", "Write project READMEs with screenshots", "Create/update resume for full stack roles", "LinkedIn optimization, GitHub profile"],
+        practice: [
+          { name: "GFG: Developer Resume", url: "https://www.geeksforgeeks.org/how-to-make-a-resume-for-software-developers/" },
+          { name: "GitHub Profile Guide", url: "https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/" },
+          { name: "Portfolio Tips", url: "https://www.geeksforgeeks.org/how-to-build-a-portfolio-website/" }
+        ]
+      },
+      {
+        day: 88,
+        title: "System Design & Interview Prep",
+        tags: ["dsa"],
+        topics: ["System design basics: load balancing, caching, CDN", "Database sharding, replication", "Design: URL shortener, chat app", "Behavioral interview: STAR method"],
+        practice: [
+          { name: "GFG: System Design", url: "https://www.geeksforgeeks.org/system-design-tutorial/" },
+          { name: "System Design Primer", url: "https://github.com/donnemartin/system-design-primer" },
+          { name: "GFG: Interview Prep", url: "https://www.geeksforgeeks.org/most-asked-system-design-interview-questions/" }
+        ]
+      },
+      {
+        day: 89,
+        title: "Mock Interviews & DSA Marathon",
+        tags: ["dsa"],
+        topics: ["Solve 10 LeetCode problems (easy+medium mix)", "Mock interview on Pramp/Interviewing.io", "Review common JS/React/Node interview Qs", "Time yourself: 20 min per problem"],
+        practice: [
+          { name: "LeetCode: Blind 75", url: "https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions" },
+          { name: "GFG: Interview Questions", url: "https://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/" },
+          { name: "Pramp: Mock Interviews", url: "https://www.pramp.com/" }
+        ]
+      },
+      {
+        day: 90,
+        title: "🎓 Day 90 — You're Job Ready!",
+        tags: ["project"],
+        topics: ["Final checklist: portfolio, resume, GitHub, LinkedIn", "Apply to 10 jobs today", "Review all weak areas identified", "Plan: Continue DSA daily, build side projects"],
+        practice: [
+          { name: "GFG: Job Portal", url: "https://www.geeksforgeeks.org/jobs" },
+          { name: "LeetCode: Daily Challenge", url: "https://leetcode.com/problemset/all/" },
+          { name: "Naukri.com", url: "https://www.naukri.com/" }
+        ]
+      }
+    ]
+  }
+];
+
+const STORAGE_KEY = "fsd90_progress";
+
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+}
+
+function saveProgress(p) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+}
+
+let progress = loadProgress();
+let activePhase = 0;
+
+function getTotal() { return DATA.reduce((s, p) => s + p.days.length, 0); }
+function getCompleted() { return Object.keys(progress).filter(k => progress[k]).length; }
+
+function calcStreak() {
+  let streak = 0;
+  const completedDays = Object.keys(progress).filter(k => progress[k]).map(Number).sort((a,b) => b - a);
+  if (!completedDays.length) return 0;
+  // Simple: count consecutive completed from latest
+  for (let i = 0; i < completedDays.length; i++) {
+    if (i === 0 || completedDays[i] === completedDays[i-1] - 1) streak++;
+    else break;
+  }
+  return streak;
+}
+
+function updateStats() {
+  const total = getTotal();
+  const completed = getCompleted();
+  const pct = total ? Math.round((completed / total) * 100) : 0;
+  document.getElementById("completedCount").textContent = completed;
+  document.getElementById("totalCount").textContent = total;
+  document.getElementById("progressPct").textContent = pct + "%";
+  document.getElementById("progressFill").style.width = pct + "%";
+  document.getElementById("streakCount").textContent = calcStreak();
+}
+
+function tagHTML(tag) {
+  const map = { js: "tag-js", react: "tag-react", node: "tag-node", mongo: "tag-mongo", pg: "tag-pg", project: "tag-project", dsa: "tag-dsa" };
+  const labels = { js: "JS", react: "React", node: "Node", mongo: "Mongo", pg: "PgSQL", project: "Project", dsa: "DSA" };
+  return `<span class="tag ${map[tag]}">${labels[tag]}</span>`;
+}
+
+function renderPhase(idx) {
+  const phase = DATA[idx];
+  let html = `<div class="phase-section">
+    <div class="phase-title-bar">
+      <div class="phase-icon" style="background:${phase.color}22;color:${phase.color}">${phase.icon}</div>
+      <h2>${phase.phase}</h2>
+      <span class="phase-range">${phase.range}</span>
+    </div>`;
+
+  phase.days.forEach(d => {
+    const checked = !!progress[d.day];
+    html += `<div class="day-card ${checked ? 'completed' : ''}" id="card-${d.day}">
+      <div class="day-header" onclick="toggleBody(${d.day})">
+        <div class="day-check ${checked ? 'checked' : ''}" onclick="event.stopPropagation();toggleCheck(${d.day})"></div>
+        <span class="day-num">DAY ${String(d.day).padStart(2,'0')}</span>
+        <span class="day-title">${d.title}</span>
+        <div class="day-tags">${d.tags.map(tagHTML).join('')}</div>
+        <span class="day-expand" id="arrow-${d.day}">▼</span>
+      </div>
+      <div class="day-body" id="body-${d.day}">
+        <ul class="topic-list">${d.topics.map(t => `<li>${t}</li>`).join('')}</ul>
+        <div class="practice-section">
+          <h4>⚡ Practice & Resources</h4>
+          <div class="practice-links">${d.practice.map(p =>
+            `<a class="practice-link" href="${p.url}" target="_blank" rel="noopener"><span class="pl-icon">↗</span>${p.name}</a>`
+          ).join('')}</div>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  html += `</div>`;
+  document.getElementById("content").innerHTML = html;
+}
+
+function renderTabs() {
+  const container = document.getElementById("phaseTabs");
+  container.innerHTML = DATA.map((p, i) =>
+    `<button class="phase-tab ${i === activePhase ? 'active' : ''}" onclick="switchPhase(${i})">${p.range.split(':')[0] || p.range}</button>`
+  ).join('');
+}
+
+function switchPhase(idx) {
+  activePhase = idx;
+  renderTabs();
+  renderPhase(idx);
+}
+
+function toggleCheck(day) {
+  progress[day] = !progress[day];
+  saveProgress(progress);
+  const card = document.getElementById(`card-${day}`);
+  const check = card.querySelector('.day-check');
+  if (progress[day]) {
+    check.classList.add('checked');
+    card.classList.add('completed');
+  } else {
+    check.classList.remove('checked');
+    card.classList.remove('completed');
+  }
+  updateStats();
+}
+
+function toggleBody(day) {
+  const body = document.getElementById(`body-${day}`);
+  const arrow = document.getElementById(`arrow-${day}`);
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+function resetProgress() {
+  if (confirm("Reset all progress? This cannot be undone.")) {
+    progress = {};
+    saveProgress(progress);
+    renderPhase(activePhase);
+    updateStats();
+  }
+}
+
+// Init
+renderTabs();
+renderPhase(0);
+updateStats();
+</script>
+</body>
+</html>
